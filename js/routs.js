@@ -5,13 +5,15 @@ const userControler = require('../controlers/userControlers')
 const devControler = require('../controlers/devControler')
 const prodControler = require('../controlers/prodControlers')
 const upload = require('../config/multer')
+const paymentControler = require('../controlers/paymentControler')
 
 
 // Car routs
 
 router.post('/car' ,userControler.checktoken,carControler.createCar)
-router.patch('/car/addProduct/:prodId',userControler.checktoken,carControler.addProduct)
+router.patch('/car/addProduct/:prodId/:qut',userControler.checktoken,carControler.addProduct)
 router.patch('/car/delete/:prodId',userControler.checktoken, carControler.removeProdByCar)
+router.patch('/car/quantity/:prodId/:qut',userControler.checktoken, carControler.quantityChange)
 router.get('/car',userControler.checktoken, carControler.findProduct)
 
 // User Routs
@@ -31,9 +33,13 @@ router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDe
 
 router.post('/products' ,upload.single("file"),devControler.checktoken, prodControler.createProd)
 router.get('/products', prodControler.findAll )
-router.get('/products/:name', prodControler.findOne)
+router.get('/products/:id', prodControler.findOne)
 router.delete('/products/:id',devControler.checktoken, prodControler.remove)
 router.patch('/products/:id/:stn'  ,devControler.checktoken,prodControler.uploadStock)
+
+// Payment Routs
+
+router.post('/create-checkout-session', userControler.checktoken, paymentControler.paymentPageGenerate)
 
 
 module.exports = router

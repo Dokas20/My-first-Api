@@ -1,6 +1,7 @@
 const Prod= require('../models/prodModls')
 const fs = require('fs')
 
+
 exports.createProd= async (req,res)=> {
     try {
         const {name,description, price, stock} = req.body
@@ -34,8 +35,8 @@ exports.findAll = async (req,res)=> {
 }
 exports.findOne = async (req,res)=> {
     try {
-        const name = req.params.name
-        const product = await Prod.find({name: name})
+        const id = req.params.id
+        const product = await Prod.findOne({_id: id})
         res.status(200).json(product) 
         if(!product){
             res.status(402).json({message: "Produto não encontrado"})
@@ -76,6 +77,8 @@ exports.uploadStock = async (req,res)=> {
         res.status(500).json({message: `Produto não encontrado ${error}`})
     }
 }
+
+
 
 
 
