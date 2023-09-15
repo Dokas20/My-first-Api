@@ -84,9 +84,10 @@ exports.addProduct = async (req,res)=> {
 
         // Verificar se já não existe o produto
 
-        const prodAdd = await Car.findOne({ userId: userId }, {products:{_id: prodId}})
+        const prodAdd = await Car.findOne({ userId: userId})
+        const prodExist = prodAdd.products.filter((prod) => prod._id == prodId)
 
-        if(prodAdd) return res.status(402).json({msg: "Já existe esse produto no carrinho"})
+        if(prodExist) return res.status(402).json({msg: "Já existe esse produto no carrinho"})
 
 
         const updateStatus = await Car.updateOne({userId: userId}, {$push:{products:{_id: prodId, quantity: quanti}}}) 

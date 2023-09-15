@@ -38,8 +38,10 @@ router.delete('/products/:id',devControler.checktoken, prodControler.remove)
 router.patch('/products/:id/:stn'  ,devControler.checktoken,prodControler.uploadStock)
 
 // Payment Routs
-
-router.post('/create-checkout-session' ,paymentControler.validPriceInCentsTokens, paymentControler.paymentPageGenerate)
+/*
+router.post('/create-checkout-session' ,paymentControler.validPriceInCentsTokens, paymentControler.paymentPageGenerate)*/
+router.post('/create-checkout-session' ,userControler.checktoken, paymentControler.test)
+router.get('/checkout-session', paymentControler.checkoutSession)
 
 
 module.exports = router

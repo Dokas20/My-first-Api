@@ -2,64 +2,83 @@ const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const Prod= require('../models/prodModls')
+const Car = require('../models/carModel')
 
-exports.validPriceInCentsTokens = async (req,res, next) => {
-  const id = req.body.id
-  const prod = await Prod.findOne({_id: id})
+exports.test = async (req,res) => {
 
-  const token = prod.priceInCents
-  if(!token){
-      return res.status(401).json({msg:"Acesso negado!"})
-  }
+
   try {
-      jwt.verify(token, process.env.SECRET, (err, price)=> {
-          if(err) return res.status(403).json({msg: "expired Token"})
-          req.price = price.price 
-        next()
-      })    
+        
+    const userId = req.id
 
-  } catch (error) {
-      res.status(400).json({msg: "Token inválido"})
-  } 
-}
+    const car = await Car.find({ userId: userId })
+    if(!car){
+        return res.json({msg: "Usuário sem carrinho criado"})
+    }
+    const prodLength = car[0].products.length
+    
+    const line_items = []
+
+    for(let a = 0 ; a< prodLength; a++){
+      
+      const id = car[0].products[a]._id
+      const prod = await Prod.findOne({_id: id})
+      
+      const token = prod.priceInCents
 
 
-exports.paymentPageGenerate = async (req, res) => {
+      if(!token){
+          return res.status(401).json({msg:"Acesso negado!"})
+      }
+      try {
+          jwt.verify(token, process.env.SECRET, (err, price)=> {
+              if(err) return res.status(403).json({msg: "expired Token"})
+              req.pric = price.price
+            })    
+    
+        } catch (error) {
+          res.status(400).json({msg: "Token inválido"})
+        } 
 
 
-const id = req.body.id
-const prod = await Prod.findOne({_id: id})
+      const name = prod.name
+      const description = prod.description
+      const priceInCents = req.pric
+      const quantity = car[0].products[a].quantity
 
-const priceInCents = req.price
-const name = prod.name
-const description = prod.description
-const quantity= req.body.quantity
 
-const line_items =     {
-  price_data: {
-    currency: 'eur',
-    unit_amount : priceInCents ,
-    product_data: {
-      name: name,
-      description: description
-    },
-  },
-  quantity: quantity,
-}
+      const line_item =     {
+        price_data: {
+          currency: 'eur',
+          unit_amount : priceInCents ,
+          product_data: {
+            name: name,
+            description: description
+          },
+        },
+        quantity: quantity,
+      }
+      line_items.push(line_item)
+    }
 
-   try{
     const session = await stripe.checkout.sessions.create({
-      line_items: [
-        line_items
-      ],
+      line_items:  line_items,
       billing_address_collection: 'required',
       success_url: `http://localhost:3000/success.html`,
       cancel_url: `http://localhost:3000/cancel.html`,
       mode: 'payment'
     }) ;
     res.json(200, {msg: session.url })
-  } catch (error) {
-    res.json(500, { error })
-  }
- 
+
+
+} catch (error) {
+    res.status(500).json({ message: error })
+}
+
+}
+
+
+exports.checkoutSession =  async (req,res)=> {
+  const session = await stripe.checkout.sessions.retrieve(req.query.id, {expand: ['line_items']})
+  res.json(session)
 }
