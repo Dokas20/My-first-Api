@@ -39,7 +39,7 @@ router.patch('/products/:id/:stn'  ,devControler.checktoken,prodControler.upload
 
 // Payment Routs
 
-router.post('/create-checkout-session', userControler.checktoken, paymentControler.paymentPageGenerate)
+router.post('/create-checkout-session' ,paymentControler.validPriceInCentsTokens, paymentControler.paymentPageGenerate)
 
 
 module.exports = router
