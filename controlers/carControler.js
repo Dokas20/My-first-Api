@@ -25,32 +25,57 @@ exports.createCar = async (req, res) => {
 
 }
 
-
+// Funciona porem não utilizando a propriedade pull ou funcionalidades de array do mongodb em nodejs, devido a problemas tecnicos e bugs
 
 exports.removeProdByCar = async (req, res) => {
     const userId = req.id
 
     const car = await Car.find({ userId: userId })
+    const prodId = req.params.prodId
 
+    
     if(!car){
         return res.status(500).json({msg: "Carrinho não existe"})
     }
 
+    const carProductsLength = car[0].products.length
+
+    const carProductsUpdated = []
+    const prodIdValid = []
+
+    for(let a = 0; a< carProductsLength; a++){
+        if(car[0].products[a]._id === prodId){
+            prodIdValid.push(a)
+        }else{
+            const id = car[0].products[a]._id
+            const quantity = car[0].products[a].quantity
+    
+            const carSlote = {_id: id, quantity: quantity}
+            carProductsUpdated.push(carSlote)
+
+        }
+    }
+
+    if(prodIdValid.length < 1){
+        return res.json(404, {msg: "Produto não encontrado"})
+    }
+
+
     try {
-        const prodId = req.params.prodId
-
-        const updateProduct = await Car.updateOne({ userId: userId }, {$pull:{products:prodId}})
-
-        if (updateProduct.matchedCount === 0) {
-            return res.status(422).json({ message: "Produto não removido" })
+            const updateProduct = await Car.updateOne({ userId: userId }, {$set:{products: carProductsUpdated}})
+    
+            if (updateProduct.matchedCount === 0) {
+                return res.status(422).json({ message: "Produto não removido" })
+            }
+    
+            res.status(200).json({msg: "Produto removido com sucesso"})
+        } 
+        catch (error) {
+            res.status(500).json({ message: 'Erro ao deletar produto' + error })
         }
 
-        res.status(200).json({"message": updateProduct})
     } 
-    catch (error) {
-        res.status(500).json({ message: 'Erro ao deletar produto' + error })
-    }
-}   
+
 
 exports.findProduct = async (req, res) => {    
     try {
@@ -79,20 +104,21 @@ exports.addProduct = async (req,res)=> {
         return res.status(500).json({msg: "Carrinho não existe"})
     }
     try {
-        const prodId = req.params.prodId
-        const quanti = req.params.qut
+        const prodId = req.body.prodId
+        const quanti = req.body.qut
 
         // Verificar se já não existe o produto
 
         const prodAdd = await Car.findOne({ userId: userId})
         const prodExist = prodAdd.products.filter((prod) => prod._id == prodId)
+        if(prodExist.length < 1) {
+            const updateStatus = await Car.updateOne({userId: userId}, {$push:{products:{_id: prodId, quantity: quanti}}}) 
+    
+            res.status(200).json(updateStatus)
+            
+        } else return res.status(402).json({msg: "Produto já adicionado ao carrinho"})
 
-        if(prodExist) return res.status(402).json({msg: "Já existe esse produto no carrinho"})
 
-
-        const updateStatus = await Car.updateOne({userId: userId}, {$push:{products:{_id: prodId, quantity: quanti}}}) 
-
-        res.status(200).json(updateStatus)
     } catch (error) {
         res.status(500).json({ message: 'Erro ao adicionar produto ao carrinho' + error })
     }

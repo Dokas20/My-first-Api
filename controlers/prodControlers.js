@@ -6,7 +6,7 @@ require('dotenv').config()
 
 exports.createProd= async (req,res)=> {
     try {
-        const {name,description, price,priceInCents, stock} = req.body
+        const {destaque,name,description, price,priceInCents, stock} = req.body
         const file = req.file;
 
         const prodName = await Prod.findOne({name: name})
@@ -15,6 +15,7 @@ exports.createProd= async (req,res)=> {
         const priceToken = jwt.sign({price: priceInCents}, process.env.SECRET)
    
         const prod = new Prod({
+            destaque,
             name,
             description,
             price,
@@ -56,6 +57,18 @@ exports.findOne = async (req,res)=> {
         res.status(500).json({message: `Produto não encontrado ${error}`})
     }
 }
+exports.findDestaquedAll = async (req,res)=> {
+    try {
+        const products = await Prod.find({destaque:true},'-priceInCents') 
+        res.status(200).json(products)
+        if(!products){
+            return res.status(402).json({message:"Não existe produtos"})
+        }
+        
+    } catch (error) {
+        res.status(500).json({message: `Produtos não encontrado ${error}`})
+    }
+}
 
 
 exports.remove = async (req,res)=> {
@@ -86,6 +99,19 @@ exports.uploadStock = async (req,res)=> {
         
     } catch (error) {
         res.status(500).json({message: `Produto não encontrado ${error}`})
+    }
+}
+
+exports.sercheAllDestaquedProducts = async (req,res)=> {
+    try {
+        const products = await Prod.find({destaque: true},'-priceInCents') 
+        if(!products){
+            res.status(402).json({message:"Não existe produtos"})
+        }
+        
+        return res.status(200).json(products)
+    } catch (error) {
+        res.status(500).json({message: `Produtos não encontrado ${error}`})
     }
 }
 
