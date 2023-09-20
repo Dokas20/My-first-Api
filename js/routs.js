@@ -20,8 +20,8 @@ router.get('/car',userControler.checktoken, carControler.findProduct)
 
 router.post('/user/register', userControler.create)
 router.post('/user/login', userControler.login)
-router.get('/user', userControler.checktoken, userControler.findOne)
-
+/*router.get('/user', userControler.checktoken, userControler.findOne)
+*/
 // Dev routs
 
 router.post('/dev/login', devControler.loginDev)
@@ -33,8 +33,7 @@ router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDe
 
 router.post('/products' ,upload.single("file"),devControler.checktoken, prodControler.createProd)
 router.get('/products', prodControler.findAll )
-router.get('/products/destaqued', prodControler.findDestaquedAll )
-router.get('/products/destac', prodControler.sercheAllDestaquedProducts )
+router.get('/products/destaqued', prodControler.sercheAllDestaquedProducts )
 router.get('/products/:id', prodControler.findOne)
 router.delete('/products/:id',devControler.checktoken, prodControler.remove)
 router.patch('/products/:id/:stn'  ,devControler.checktoken,prodControler.uploadStock)

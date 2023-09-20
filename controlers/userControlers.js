@@ -13,12 +13,11 @@ exports.create = async (req, res) => {
     const { name, email, password } = req.body
 
     if (!name) {
-        res.status(422).json({ error: 'O nome é obrigatorio' })
+        return res.status(422).json({ error: 'O nome é obrigatorio' })
     } else if (!email) {
-        res.status(422).json({ error: 'O Email é obrigatorio' })
-        return
+        return res.status(422).json({ error: 'O Email é obrigatorio' })
     } else if (!password) {
-        res.status(422).json({ error: 'A Password é obrigatorio' })
+        return res.status(422).json({ error: 'A Password é obrigatorio' })
     }
 
     const userExists = await User.findOne({ email: email })
@@ -108,7 +107,7 @@ exports.generateAcessToken = async (req,res)=> {
 */
 
 // Procurar o usuario atraves do seu token
-
+/*
 exports.findOne = async (req, res) => {
     try {
         const  id = req.id
@@ -128,7 +127,7 @@ exports.findOne = async (req, res) => {
         res.status(500).json({ message: `User não encontrado ${error}` })
     }
 }
-
+*/
 // veririfcar se os tokebs de acesso são validos
 
 exports.checktoken = async (req,res, next) => {

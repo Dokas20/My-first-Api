@@ -14,6 +14,14 @@ app.use(
 
 app.use(express.json())
 
+// Adicionar paginas publicas ao servidor
+app.use(express.static("public"))
+const cors = require("cors")
+app.use(
+    cors({
+      origin: "http://localhost:5500",
+    })
+  ) 
 // adicionar as rotas á aplicação
 
 
