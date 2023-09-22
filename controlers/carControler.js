@@ -82,7 +82,7 @@ exports.findProduct = async (req, res) => {
         
         const userId = req.id
 
-        const car = await Car.find({ userId: userId })
+        const car = await Car.findOne({ userId: userId })
         if(!car){
             return res.json({msg: "Usuário sem carrinho criado"})
         }
@@ -114,7 +114,9 @@ exports.addProduct = async (req,res)=> {
         if(prodExist.length < 1) {
             const updateStatus = await Car.updateOne({userId: userId}, {$push:{products:{_id: prodId, quantity: quanti}}}) 
     
-            res.status(200).json(updateStatus)
+            if(updateStatus.matchedCount > 0){
+            return res.status(200).json({msg : "Produto adicionado com sucesso"})
+            }
             
         } else return res.status(402).json({msg: "Produto já adicionado ao carrinho"})
 
@@ -139,7 +141,10 @@ exports.quantityChange = async (req,res) => {
     try {
         
         const changeQuantity = await Car.updateOne({userId: userId}, {$set:{products:{_id: prodId, quantity: quanti}}}) 
-        return res.status(200).json({msg: changeQuantity})
+
+        if(changeQuantity.matchedCount > 0){
+            return res.status(200).json({msg: "Quantidade alterada com sucesso"})
+        }
 
     } catch (error) {
         res.status(500).json({ msg: error })

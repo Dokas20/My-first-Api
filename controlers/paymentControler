@@ -68,7 +68,7 @@ exports.test = async (req,res) => {
       cancel_url: `http://localhost:3000/cancel.html`,
       mode: 'payment'
     }) ;
-    res.json(200, {msg: session.url })
+    res.json(200, session.url )
 
 
 } catch (error) {
