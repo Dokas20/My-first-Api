@@ -31,7 +31,7 @@ router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDe
 
 // Prod Routs
 
-router.post('/products' ,upload.single("file"),devControler.checktoken, prodControler.createProd)
+router.post('/products' ,upload.array("files"),devControler.checktoken, prodControler.createProd)
 router.get('/products', prodControler.findAll )
 router.get('/products/destaqued', prodControler.sercheAllDestaquedProducts )
 router.get('/products/:id', prodControler.findOne)

@@ -19,7 +19,7 @@ btnHamb.addEventListener('click', async () => {
     //getAllProducts()
     //getAllDestaquedProducts()
     const idForOneProduct = '6509cd333ca238760bdb5e09'
-    //findOneProduct(idForOneProduct)
+    findOneProduct(idForOneProduct)
     //sigInUser(name,email,password)
     const email = 'duarteffsilva08@gmail.comm'
     const password = 'DOKASdokas'
@@ -33,8 +33,8 @@ btnHamb.addEventListener('click', async () => {
     //removeProduct (userToken,_id)
     //addProduct (userToken,_id,quantity)
     //quantityChange (userToken,_id,quantity)
-    searchCar (userToken)
-    //checkoutSession(userToken).then(url => window.location = url)
+    //searchCar (userToken)
+    checkoutSession(userToken).then(url => window.location = url)
 })
 
 // Public Routs

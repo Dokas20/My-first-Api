@@ -3,17 +3,15 @@ const fs = require('fs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-
 exports.createProd= async (req,res)=> {
     try {
         const {destaque,name,description, price,priceInCents, stock} = req.body
-        const file = req.file;
+        const file = req.files;
 
         const prodName = await Prod.findOne({name: name})
         if(prodName)return res.status(404).json({msg: "Produto com nome identico ja criado"})
 
         const priceToken = jwt.sign({price: priceInCents}, process.env.SECRET)
-   
         const prod = new Prod({
             destaque,
             name,
@@ -21,7 +19,7 @@ exports.createProd= async (req,res)=> {
             price,
             priceInCents:priceToken,
             stock,
-            src: file.path
+            src: file[0].path
         })
 
         await prod.save()
@@ -76,7 +74,7 @@ exports.remove = async (req,res)=> {
         const id = req.params.id
         const product = await Prod.findById({_id:id})
 
-        if(!product){ return res.status(404).json({message: "Imagen não encontrada"})}
+        if(!product){ return res.status(404).json({message: "Produto não encontrado"})}
 
         fs.unlinkSync(product.src)
 

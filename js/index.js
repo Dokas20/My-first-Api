@@ -12,6 +12,9 @@ app.use(
     }),
 )
 
+// Set Request size limit
+app.use(express.json({limit: '1mb'}));
+
 app.use(express.json())
 
 // Adicionar paginas publicas ao servidor
