@@ -1,22 +1,37 @@
+const btnSubmit = document.getElementById('isubmit')
 
-document.getElementById('btnToken').addEventListener('click',async () => {
-    const firstPass =   'fmXfsKmbRB52Scm0OLrnJZxoOs9vMbwVtOyzXNbm2YckUMB3MQZzyNDajF9tOhMZvuNOKfgD5fTO7VL1DanFwqhcRCr1GNfgOvVo'
-    const secondPass = 'fWeWeF7ajQGVAAiftiIoNONWgGX054BRFqHNM3IezwXXSEeyi5QVqGbn7UOZ696bHHX3RBtI0VQYac2hUSKKSX0Sqbajs8NcCGr3'
-    const thirdPass = 'lj1UKAIMjCNqUqFDxzoGCdww5FUsKOtbaLNmBVaTbsRdbw6SWfJ3bGapUmNzHkpV4PyCtfKVjQpPNxCaOX6XwpP9GcNzlhmyN3P2'
+const devTokens = []
+
+btnSubmit.addEventListener('click',async (e) => {
     
+    e.preventDefault()
+    const firstPass= document.getElementById('iPass1').value
+    const secondPass= document.getElementById('iPass2').value
+    const thirdPass= document.getElementById('iPass3').value
+
     loginDev(firstPass, secondPass,thirdPass).then(data => (devData = data)).catch((e)=>console.log(e))
     devData =await  loginDev(firstPass, secondPass,thirdPass)
-    
-    const devToken = devData.token
-    const devRefreshToken = devData.refreshtoken
-    //addProduct(devToken)
-   const idForDelete = '651075750e5c508fde4ff029'
-    deleteProduct(devToken, idForDelete)
+    console.log(devData)
+    if(devData.token){
+        tokens = {
+            token: devData.token,
+            refreshtoken :devData.refreshtoken 
+        }
+        
+        devTokens.push(tokens) 
+        
+    }else{
+       return console.log(devData)
+    }
     
 })
-
+//const idForDelete = '651075750e5c508fde4ff029'
+//deleteProduct(devToken, idForDelete)
+//getEmails(devToken)
+//addProduct(devToken)
+/*
+*/
 // Dev Routs
-const btnSubmit = document.getElementById('idsubmit')
 
 
 /*
@@ -165,4 +180,17 @@ async function deleteProduct (token, id){
     })
     const logoutMessage = await result.json()
     console.log(logoutMessage)
+}
+async function getEmails (token){
+    const result = await fetch(`http://localhost:3000/user`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+    }).catch(e => {
+        console.log(e.error)
+    })
+    const dataProducts = await result.json()
+    console.log(dataProducts)
 }

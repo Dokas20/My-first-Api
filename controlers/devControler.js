@@ -5,7 +5,7 @@ require('dotenv').config()
 exports.loginDev = async (req,res)=> {
     const {firstPass, secondPass, thirdPass}= req.body
 
-    if(!firstPass || !secondPass || !thirdPass) return res.status(422).json('Prencha as passwords')
+    if(!firstPass || !secondPass || !thirdPass) return res.status(422).json('Prencha as passwords') 
 
     const envPass1 = process.env.FIRST_PASS
     const envPass2 = process.env.SECOND_PASS
@@ -24,7 +24,8 @@ exports.loginDev = async (req,res)=> {
             res.status(200).json({msg: "Login de Desenvolvedor com sucesso   ", token: token,refreshtoken: refreshToken })
     } catch (error) { return res.status(500).json(error)
         }
-    }
+    } else { return res.status(422).json('Prencha as passwords corretamente') 
+}
 }
 
 

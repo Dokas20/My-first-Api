@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="devScript.js" defer></script>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --background-color: rgba(42, 42, 42, 0.14);
+            --main-Color: white;
+            --wrongInputColor: red;
+            --main-heigth: var(--main-width);
+            --main-width: 80dvw;
+        }
+
+        body {
+            background-color: var(--background-color);
+            height: 100dvh;
+            width: 100dvw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            background-color: var(--main-Color);
+            max-width: 500px;
+            min-width: 240px;
+            width: var(--main-width);
+            height: var(--main-heigth);
+            min-height: 350px;
+            max-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 5px;
+            box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.139);
+        }
+        h1{
+            margin: 5px;
+            padding: 5px;
+        }
+        form {
+            align-self: center;
+            width: 80%;
+            max-width: 400px;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        form input{
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-bottom: 1px solid black;
+            outline: none;
+            font-size: 1.2em;
+            width: 90%;
+        }
+
+        label {
+            font-size: 1em;
+            padding: 5px;
+        }
+        
+        .form:focus {
+            height: 1.4em;
+            background-color: rgba(205, 205, 205, 0.072);
+        }
+        form div {
+            width: 90%;
+            display: flex;
+        }
+
+        div#submit input {
+            width: 100%;
+            padding: 5px 0px;
+            background-color: var(--background-color);
+            border: 1.5px solid white;
+            font-weight: 600;
+            font-size: 0.8em;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.107);
+            cursor: pointer;
+            margin: 1px;
+        }
+
+        div#submit input:hover {
+            border-radius: 0%;
+            border: 1.5px solid rgb(150, 150, 150);
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Login DEV</h1>
+        <form id="loginFormDev" action="" method="post" autocomplete="off">
+                <label for="iPass1">Pass 1</label>
+                <input type="password" name="firstPass" id="iPass1" class="form" required><br>
+                <label for="iPass2">Pass 2</label>
+                <input type="password" name="secondPass" id="iPass2" class="form" required><br>
+                <label for="iPass3">Pass 3</label>
+                <input type="password" name="thirdPass" id="iPass3" class="form" required><br>
+            <div id="submit">
+                <input type="submit" id="isubmit" value="Enviar">
+                <input type="reset" value="Limpar">
+            </div>
+        </form>
+        <div id="apiResponse"></div>
+        <img src="#" alt="Imagem Do Logo da loja">
+    </main>
+</body>
+
+</html>

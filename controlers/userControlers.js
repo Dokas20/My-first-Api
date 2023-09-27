@@ -107,27 +107,18 @@ exports.generateAcessToken = async (req,res)=> {
 */
 
 // Procurar o usuario atraves do seu token
-/*
-exports.findOne = async (req, res) => {
+
+exports.findAllUsers = async (req, res) => {
     try {
-        const  id = req.id
+        const users = await User.find({}, '-password')
 
-        // check if user exists
-
-        const user = await User.findOne({_id: id}, '-password')
-
-
-        if (!user) {
-        return  res.status(402).json({ message: "User not Found" })
-        }
-
-        return res.status(200).json(user)
+        return res.status(200).json(users)
 
     } catch (error) {
         res.status(500).json({ message: `User não encontrado ${error}` })
     }
 }
-*/
+
 // veririfcar se os tokebs de acesso são validos
 
 exports.checktoken = async (req,res, next) => {

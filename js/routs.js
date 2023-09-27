@@ -20,8 +20,8 @@ router.get('/car',userControler.checktoken, carControler.findProduct)
 
 router.post('/user/register', userControler.create)
 router.post('/user/login', userControler.login)
-/*router.get('/user', userControler.checktoken, userControler.findOne)
-*/
+router.get('/user', devControler.checktoken, userControler.findAllUsers)
+
 // Dev routs
 
 router.post('/dev/login', devControler.loginDev)
