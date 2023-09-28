@@ -1,9 +1,11 @@
 const btnSubmit = document.getElementById('isubmit')
+const token = sessionStorage.getItem('token')
+const refreshToken = sessionStorage.getItem('refreshToken')
 
-const devTokens = []
+if(!token){  // Se houver o botao a funcao de login é activa
 
-btnSubmit.addEventListener('click',async (e) => {
-    
+    btnSubmit.addEventListener('click',async (e) => {
+        
     e.preventDefault()
     const firstPass= document.getElementById('iPass1').value
     const secondPass= document.getElementById('iPass2').value
@@ -11,20 +13,66 @@ btnSubmit.addEventListener('click',async (e) => {
 
     loginDev(firstPass, secondPass,thirdPass).then(data => (devData = data)).catch((e)=>console.log(e))
     devData =await  loginDev(firstPass, secondPass,thirdPass)
-    console.log(devData)
     if(devData.token){
-        tokens = {
-            token: devData.token,
-            refreshtoken :devData.refreshtoken 
-        }
-        
-        devTokens.push(tokens) 
-        
+       sessionStorage.setItem('token', `${devData.token}`)
+       sessionStorage.setItem('refreshToken', `${devData.refreshtoken}`)
+
+        const url = document.createElement('a')
+        url.setAttribute('href', `devInterface.html`)
+        window.location = url.href
     }else{
-       return console.log(devData)
+        document.getElementById('apiResponse').innerText= devData
     }
     
 })
+} else if(token){
+    
+    menuHamburguer()
+    showTheFirstInformations()
+}
+
+function menuHamburguer(){
+    const btnMenu = document.getElementById('menuDiv')
+    btnMenu.addEventListener('click', ()=> {
+        document.getElementById('menu').classList.toggle('menuShow')
+    })
+}
+function showTheFirstInformations(){
+    const Destaqued= document.getElementById('Destaqued')
+    const allProducts= document.getElementById('allProducts')
+
+    getAllDestaquedProducts().then((prod)=> {
+        for(let a = 0; a< prod.length; a++){
+          createProdPost(prod[a],Destaqued )
+        }
+    })
+    
+    getAllProducts().then((prod)=> {
+        for(let c = 0; c< prod.length; c++){
+            createProdPost(prod[c],allProducts)
+        }
+
+    })
+
+}
+function createProdPost(prod, apendConst){
+    const div = document.createElement('div')
+    const h1 = document.createElement('h1')
+    const description = document.createElement('p')
+    const img= document.createElement('img')
+
+    h1.innerText= prod.name
+    description.innerText = prod.description
+    img.innerHTML = `<img src='../../${prod.src}' alt="Product Img">`
+
+    div.appendChild(h1)
+    div.appendChild(description)
+    div.append(img)
+  //  div.appendChild(img)
+    div.classList.add('productsDiv')
+  apendConst.appendChild(div)
+}
+
 //const idForDelete = '651075750e5c508fde4ff029'
 //deleteProduct(devToken, idForDelete)
 //getEmails(devToken)
@@ -113,14 +161,14 @@ async function getAllProducts() {
     const result = await fetch("http://localhost:3000/products").catch(e => { console.log(e.error) })
     
     const dataAllProducts = await result.json()
-    if (dataAllProducts) return console.log(dataAllProducts)
+    if (dataAllProducts) return dataAllProducts
 }
 async function getAllDestaquedProducts() {
     const result = await fetch("http://localhost:3000/products/destaqued").catch(e => {
         console.log(e.error)
     })
     const dataAllDestaquedProducts = await result.json()
-    if (dataAllDestaquedProducts) return console.log(dataAllDestaquedProducts)
+    if (dataAllDestaquedProducts) return dataAllDestaquedProducts
 }
 
 

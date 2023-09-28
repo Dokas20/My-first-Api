@@ -1,0 +1,102 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+:root{
+    --main-color: black;
+    --contrast-color: rgb(255, 255, 255);
+    --first-palet-color: rgb(113, 140, 130);
+    --second-palet-color: #a8d7b8;
+    --third-palet-color: #572D28;
+}
+body{
+    height: 100dvh;
+    width: 100dvw;
+}   
+header{
+    height: 10dvh;
+    width: 100%;
+    background-color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.menuHide{
+    display: none;
+}
+.menuShow{
+    display: block;
+}
+#menu a {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: var(--first-palet-color);
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+
+}
+#menu a:hover,#menu a:active {
+    color: white;
+    background-color:  rgba(126, 163, 149, 0.651);
+}
+#menuDiv,
+#menuDiv::before,
+#menuDiv::after {
+  margin-left: 30px;
+  display: block;
+  background-color: var(--contrast-color);
+  height: 5px;
+  width: 25px;
+  border-radius: 5px;
+}
+
+#menuDiv::before {
+  content: '';
+  margin-top: -8px;
+  margin-left: 02px;
+}
+
+#menuDiv::after {
+    content: '';
+    margin-left: -2px;  
+    margin-top: 10px;
+}
+div#Destaqued,div#allProducts{
+    background-color: rgba(231, 231, 231, 0.385);
+    width: 80%;
+    max-width: 400px;
+    min-width: 250px;
+    margin: 5px 0px;
+    border-radius: 12px;
+}
+#destH1, #allH1{
+    transform: translate(0px,50%);
+    background-color: var(--second-palet-color);
+    box-shadow: inset -1px -1px 10px 0.5px rgba(255, 255, 255, 0.124);
+    color: rgb(26, 26, 26);
+    padding: 0px 5px;
+    border: 1px solid black;
+}
+#container{
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.productsDiv{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+.productsDiv img{
+    height: 50%;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.297);
+}

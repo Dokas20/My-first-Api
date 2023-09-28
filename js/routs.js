@@ -26,7 +26,7 @@ router.get('/user', devControler.checktoken, userControler.findAllUsers)
 
 router.post('/dev/login', devControler.loginDev)
 router.post('/dev/refresh', devControler.generateAcessToken)
-router.delete('/dev/logout', devControler.logoutDev)
+router.delete('/dev/logout', devControler.checktoken,devControler.logoutDev)
 router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDev)
 
 // Prod Routs
@@ -41,6 +41,7 @@ router.patch('/products/:id/:stn'  ,devControler.checktoken,prodControler.upload
 // Payment Routs
 router.post('/create-checkout-session' ,userControler.checktoken, paymentControler.test)
 router.get('/checkout-session', paymentControler.checkoutSession)
+
 
 
 module.exports = router

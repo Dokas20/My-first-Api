@@ -81,11 +81,11 @@
             background-color: rgba(205, 205, 205, 0.072);
         }
         form div {
+            position: relative;
             width: 90%;
             display: flex;
         }
-
-        div#submit input {
+        div#submit input{
             width: 100%;
             padding: 5px 0px;
             background-color: var(--background-color);
@@ -102,6 +102,10 @@
             border-radius: 0%;
             border: 1.5px solid rgb(150, 150, 150);
         }
+        #apiResponse{
+            color: var(--wrongInputColor);
+            font-weight: 600;
+        }
 
 
     </style>
@@ -111,20 +115,20 @@
     <main>
         <h1>Login DEV</h1>
         <form id="loginFormDev" action="" method="post" autocomplete="off">
-                <label for="iPass1">Pass 1</label>
-                <input type="password" name="firstPass" id="iPass1" class="form" required><br>
+            <label for="iPass1">Pass 1</label>
+            <input type="password" name="firstPass" id="iPass1" class="form" required><br>
                 <label for="iPass2">Pass 2</label>
                 <input type="password" name="secondPass" id="iPass2" class="form" required><br>
                 <label for="iPass3">Pass 3</label>
                 <input type="password" name="thirdPass" id="iPass3" class="form" required><br>
-            <div id="submit">
-                <input type="submit" id="isubmit" value="Enviar">
-                <input type="reset" value="Limpar">
-            </div>
+                <div id="submit">
+                    <input type="submit" id="isubmit" value="Enviar">
+                    <input type="reset" value="Limpar">
+
+               </div>
         </form>
         <div id="apiResponse"></div>
         <img src="#" alt="Imagem Do Logo da loja">
     </main>
 </body>
-
 </html>
