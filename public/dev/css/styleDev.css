@@ -22,6 +22,14 @@ header{
     align-items: center;
     justify-content: space-between;
 }
+main{
+    height: 600px;
+}
+.mainProd{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .menuHide{
     display: none;
 }
@@ -63,7 +71,7 @@ header{
 #menuDiv::after {
     content: '';
     margin-left: -2px;  
-    margin-top: 10px;
+    margin-top: 12px;
 }
 div#Destaqued,div#allProducts{
     background-color: rgba(231, 231, 231, 0.385);
@@ -100,3 +108,72 @@ div#Destaqued,div#allProducts{
     width: 50%;
     background-color: rgba(0, 0, 0, 0.297);
 }
+
+#addProduct{
+    width: 100%;
+    display: none;
+    background-color: #a8d7b8;
+    max-width: 400px;
+    min-width: 250px;
+    border-radius: 12px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px;
+    padding-bottom: 40px;
+    
+}
+#addHide{
+    display: none;
+}
+#addProduct label, input, select{
+    margin: 10px 0px;
+}
+#addProduct label{
+    font-size: 1.1em;
+    color: #000000;
+
+}
+#addProduct input{
+    background-color: transparent;
+    border-bottom: 1px solid black;
+    border-top: 0px solid black;
+    border-right: 0px solid black;
+    border-left: 0px solid black;
+    outline: none;
+    margin-left: 10px;
+    width: 100%;
+    height: 2em;
+    font-size: 1em;
+    color: #000000;
+    transform: translate(-3%);
+}
+#addProduct #btnToken{
+    border: 1px solid black;
+    background-color: #fefefeb4;
+    padding: 1px 10px ;
+    border-radius: 12px;
+}
+#addProduct #btnToken:hover{
+    border-radius: 0px;
+    background-color: #000000b4;
+    color: #ffffff;
+    border: 1px solid white;
+}
+#btnAddProduct{
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background-color: #bababa72;
+    width: 60%;
+    transform: translate(0px,9px);
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: 12px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+

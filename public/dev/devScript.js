@@ -2,22 +2,22 @@ const btnSubmit = document.getElementById('isubmit')
 const token = sessionStorage.getItem('token')
 const refreshToken = sessionStorage.getItem('refreshToken')
 
-if(!token){  // Se houver o botao a funcao de login é activa
+if(!token){  
 
     btnSubmit.addEventListener('click',async (e) => {
         
-    e.preventDefault()
-    const firstPass= document.getElementById('iPass1').value
+        e.preventDefault()
+        const firstPass= document.getElementById('iPass1').value
     const secondPass= document.getElementById('iPass2').value
     const thirdPass= document.getElementById('iPass3').value
-
+    
     loginDev(firstPass, secondPass,thirdPass).then(data => (devData = data)).catch((e)=>console.log(e))
     devData =await  loginDev(firstPass, secondPass,thirdPass)
     if(devData.token){
        sessionStorage.setItem('token', `${devData.token}`)
        sessionStorage.setItem('refreshToken', `${devData.refreshtoken}`)
-
-        const url = document.createElement('a')
+       
+       const url = document.createElement('a')
         url.setAttribute('href', `devInterface.html`)
         window.location = url.href
     }else{
@@ -25,7 +25,7 @@ if(!token){  // Se houver o botao a funcao de login é activa
     }
     
 })
-} else if(token){
+} else if(token && document.getElementById('Destaqued')){
     
     menuHamburguer()
     showTheFirstInformations()
@@ -36,14 +36,17 @@ function menuHamburguer(){
     btnMenu.addEventListener('click', ()=> {
         document.getElementById('menu').classList.toggle('menuShow')
     })
+    document.getElementById('imain').addEventListener('click', ()=> {
+        document.getElementById('menu').classList.remove('menuShow')
+    })
 }
 function showTheFirstInformations(){
     const Destaqued= document.getElementById('Destaqued')
     const allProducts= document.getElementById('allProducts')
-
+    
     getAllDestaquedProducts().then((prod)=> {
         for(let a = 0; a< prod.length; a++){
-          createProdPost(prod[a],Destaqued )
+            createProdPost(prod[a],Destaqued )
         }
     })
     
@@ -51,27 +54,39 @@ function showTheFirstInformations(){
         for(let c = 0; c< prod.length; c++){
             createProdPost(prod[c],allProducts)
         }
-
+        
     })
-
+    
 }
 function createProdPost(prod, apendConst){
     const div = document.createElement('div')
     const h1 = document.createElement('h1')
     const description = document.createElement('p')
     const img= document.createElement('img')
-
+    
     h1.innerText= prod.name
     description.innerText = prod.description
     img.innerHTML = `<img src='../../${prod.src}' alt="Product Img">`
-
+    
     div.appendChild(h1)
     div.appendChild(description)
     div.append(img)
   //  div.appendChild(img)
-    div.classList.add('productsDiv')
+  div.classList.add('productsDiv')
   apendConst.appendChild(div)
 }
+
+// addProd Section
+document.getElementById('btnAddProduct').addEventListener('click', ()=> {
+    const session = document.getElementById('addProduct')
+    session.style.display= "block"
+})
+document.getElementById('loginForm').addEventListener('submit', (e)=> {
+    e.preventDefault()
+    addProduct(token).then((res)=> {
+        document.getElementById('apiRespons').innerText = `${res}`
+    })
+})
 
 //const idForDelete = '651075750e5c508fde4ff029'
 //deleteProduct(devToken, idForDelete)
@@ -82,11 +97,7 @@ function createProdPost(prod, apendConst){
 // Dev Routs
 
 
-/*
-regenerateToken(devRefreshToken).then(data => (secondToken = data)).catch((e)=> console.log(e))
-secondToken = await regenerateToken(devRefreshToken)
-console.log(secondToken)
-*/
+
 
 
 
@@ -106,7 +117,7 @@ async function loginDev(firstPass, secondPass,thirdPass) {
     })
     const LoginDevReturn = await result.json()
     return LoginDevReturn
-}
+}/*
 async function regenerateToken (refreshtoken){
     const result = await fetch(`http://localhost:3000/dev/refresh`, {
         method: "POST",
@@ -122,6 +133,12 @@ async function regenerateToken (refreshtoken){
     const regeneratedToken = await result.json()
     return regeneratedToken
 }
+
+regenerateToken(refreshToken).then(data=> (secondToken = data)).catch((e)=> console.log(e))
+secondToken = regenerateToken(refreshToken)
+console.log(secondToken)*/
+
+
 async function logoutDev (token){
     const result = await fetch(`http://localhost:3000/dev/logout`, {
         method: "POST",
@@ -157,6 +174,11 @@ async function logoutAllDev (token){
 
 // Products 
 
+
+
+
+
+
 async function getAllProducts() {
     const result = await fetch("http://localhost:3000/products").catch(e => { console.log(e.error) })
     
@@ -189,7 +211,7 @@ async function addProduct(devToken){
     const priceInCents = document.getElementById('idpriceCents').value
     const stock = document.getElementById('idstock').value
     let destaque = (destaqued.toLowerCase() === 'true')
-
+    
     const formData = new FormData();
     formData.append("destaque",destaque)
     formData.append("name", name)

@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const Prod= require('../models/prodModls')
 
 const carControler= require('../controlers/carControler')
 const userControler = require('../controlers/userControlers')
@@ -31,7 +32,7 @@ router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDe
 
 // Prod Routs
 
-router.post('/products' ,upload.array("files"),devControler.checktoken, prodControler.createProd)
+router.post('/products' ,devControler.checktoken,upload.array("files"),prodControler.createProd)
 router.get('/products', prodControler.findAll )
 router.get('/products/destaqued', prodControler.sercheAllDestaquedProducts )
 router.get('/products/:id', prodControler.findOne)

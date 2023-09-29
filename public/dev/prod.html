@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./devScript.js" defer></script>
+    <link rel="stylesheet" href="css/styleDev.css">
+</head>
+<body>
+    <header>
+        <div id="menuDiv"></div>
+        <img src="" alt="Brande Logo">
+    </header>
+    <section id="menu" class="menuHide">
+        <nav>
+            <a href="">EmailUsers</a> 
+            <a href="">Producsts</a>   
+            <a href="">developers</a>
+            <a href="">payment</a>
+        </nav>
+    </section>
+    <section id="container">
+    </section>
+    <main id="imain" class="mainProd">
+    <div id="btnAddProduct">Adicionar Produto</div>
+<section id="addProduct">
+            
+    <form action="#" method="get" autocomplete="on" id="loginForm">
+    <label for="destaque">Destaque:</label>
+    <select name="destaque" id="destaque">
+        <option value="True">True</option>
+        <option value="False">False</option>
+    </select> <br>
+    <label for="idname">Nome:</label>
+    <input type="text" name="name" id="idname" required> <br>
+    <label for="iddesc">Descrição:</label>
+    <input type="text" name="desc" id="iddesc" required> <br>
+    <label for="idprice">Preço:</label>
+    <input type="number" name="Price" id="idprice" required> <br>
+    <label for="idpriceCents">Preço em cêntimos:</label>
+    <input type="number" name="priceCents" id="idpriceCents" required>   <br>
+    <label for="idstock">Stock:</label>
+    <input type="number" name="Stock" id="idstock" required> <br>
+    <label for="idimage">Imagem:</label>
+    <input type="file" name="Image" id="idimage" required>   <br>
+    <input type="submit" value="Enviar" id="btnToken">
+</form>
+
+    <div id="apiRespons"></div>
+
+</section>
+    </main>
+</body>
+</html

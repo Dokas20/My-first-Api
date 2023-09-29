@@ -14,7 +14,7 @@ exports.loginDev = async (req,res)=> {
     if(firstPass==envPass1 && secondPass == envPass2 && thirdPass==envPass3) {
         try {
 
-            const token = jwt.sign({pass :envPass1},process.env.DEV_API_SECRET,  {expiresIn: '16m'})
+            const token = jwt.sign({pass :envPass1},process.env.DEV_API_SECRET,  {expiresIn: '40m'})
 
 
             const refreshToken = jwt.sign({pass :envPass2}, process.env.DEV_API_REFRESH_SECRET)
