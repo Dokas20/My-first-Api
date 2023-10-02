@@ -37,7 +37,7 @@ router.get('/products', prodControler.findAll )
 router.get('/products/destaqued', prodControler.sercheAllDestaquedProducts )
 router.get('/products/:id', prodControler.findOne)
 router.delete('/products/:id',devControler.checktoken, prodControler.remove)
-router.patch('/products/:id/:stn'  ,devControler.checktoken,prodControler.uploadStock)
+router.patch('/products',devControler.checktoken,prodControler.uploadDestaqued)
 
 // Payment Routs
 router.post('/create-checkout-session' ,userControler.checktoken, paymentControler.test)

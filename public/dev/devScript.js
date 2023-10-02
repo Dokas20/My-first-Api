@@ -202,55 +202,6 @@ async function findOneProduct(id) {
     if (dataOneProduct) return console.log(dataOneProduct)
 }
 
-async function addProduct(devToken){
-    const files = document.getElementById('idimage')
-    const destaqued = document.getElementById('destaque').value
-    const name = document.getElementById('idname').value
-    const description = document.getElementById('iddesc').value
-    const price = document.getElementById('idprice').value
-    const priceInCents = document.getElementById('idpriceCents').value
-    const stock = document.getElementById('idstock').value
-    let destaque = (destaqued.toLowerCase() === 'true')
-    
-    const formData = new FormData();
-    formData.append("destaque",destaque)
-    formData.append("name", name)
-    formData.append("description", description)
-    formData.append("price", price)
-    formData.append("priceInCents", priceInCents)
-    formData.append("stock", stock)
-    for(let i =0; i < files.files.length; i++) {
-        formData.append("files", files.files[i]);
-    }
-    
-    fetch(`http://localhost:3000/products/`, {
-        method: "POST",
-        headers: {
-//"Content-Type": "application/json",
-            Authorization: `Bearer ${devToken}`
-        },
-        body: formData,
-
-    }).then(res => res.json())
-    .then(data => console.log(data))
-    .catch(e => {
-        console.log(e.error)
-    })
-}
-
-async function deleteProduct (token, id){
-    const result = await fetch(`http://localhost:3000/products/${id}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-    }).catch(e => {
-        console.log(e.error)
-    })
-    const logoutMessage = await result.json()
-    console.log(logoutMessage)
-}
 async function getEmails (token){
     const result = await fetch(`http://localhost:3000/user`, {
         method: "GET",

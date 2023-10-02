@@ -85,13 +85,12 @@ exports.remove = async (req,res)=> {
         res.status(500).json({message: error})
     }
 }
-exports.uploadStock = async (req,res)=> {
+exports.uploadDestaqued = async (req,res)=> {
 
     try {
-        const id = req.params.id
-        const stockNumber = req.params.stn
+        const {id, destaq} = req.body
 
-        const updatedProd = await Prod.updateOne({_id:id},{$set:{stock:stockNumber}})
+        const updatedProd = await Prod.updateOne({_id:id},{$set:{destaque:destaq}})
 
         res.status(200).json(updatedProd)
         

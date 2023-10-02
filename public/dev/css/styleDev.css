@@ -12,7 +12,7 @@
 }
 body{
     height: 100dvh;
-    width: 100dvw;
+    width: 98dvw;
 }   
 header{
     height: 10dvh;
@@ -172,6 +172,29 @@ div#Destaqued,div#allProducts{
     border-radius: 12px;
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
 }
+#apiRespons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+}
+.productsProd{
+    display: flex;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+    min-width: 200px;
+}
+.deleteDiv, #validBtn{
+    height: 20px;
+    width: 20px;
+    background-color: #000000;
+}
+#validBtn{
+    transform:translate(10px, 50%);
+}
+
 
 
 
