@@ -1,6 +1,6 @@
 const btnSubmit = document.getElementById('isubmit')
 const token = sessionStorage.getItem('token')
-const refreshToken = sessionStorage.getItem('refreshToken')
+
 
 if(!token){  
 
@@ -15,7 +15,6 @@ if(!token){
     devData =await  loginDev(firstPass, secondPass,thirdPass)
     if(devData.token){
        sessionStorage.setItem('token', `${devData.token}`)
-       sessionStorage.setItem('refreshToken', `${devData.refreshtoken}`)
        
        const url = document.createElement('a')
         url.setAttribute('href', `devInterface.html`)
@@ -58,47 +57,48 @@ function showTheFirstInformations(){
     })
     
 }
+const prod = {
+    src : "uploads/1694784987631.jpg"
+}
+//createImage(prod)
+    function createImage(prod) {
+        let img = document.getElementById('img');
+        let devImage = new Image();
+        devImage.src = `../${prod.src}`;
+        devImage.setAttribute('width', '300px');
+        devImage.setAttribute('height', '300px');
+        img.appendChild(devImage);
+
+     }
+
 function createProdPost(prod, apendConst){
     const div = document.createElement('div')
+    const divForImg = document.createElement('div')
+    const divForInfo = document.createElement('div')
     const h1 = document.createElement('h1')
     const description = document.createElement('p')
-    const img= document.createElement('img')
+    const  newImg = new Image()
+    newImg.src= `../${prod.src}`
+
+    // Test
+    newImg.setAttribute('width', '300px');
+    newImg.setAttribute('height', '300px');
+
+
     
     h1.innerText= prod.name
     description.innerText = prod.description
-    img.innerHTML = `<img src='../../${prod.src}' alt="Product Img">`
+   
     
-    div.appendChild(h1)
-    div.appendChild(description)
-    div.append(img)
+    divForInfo.appendChild(h1)
+    divForInfo.appendChild(description)
+    divForImg.append(newImg)
+    div.append(divForImg)
+    div.append(divForInfo)
   //  div.appendChild(img)
   div.classList.add('productsDiv')
   apendConst.appendChild(div)
 }
-
-// addProd Section
-document.getElementById('btnAddProduct').addEventListener('click', ()=> {
-    const session = document.getElementById('addProduct')
-    session.style.display= "block"
-})
-document.getElementById('loginForm').addEventListener('submit', (e)=> {
-    e.preventDefault()
-    addProduct(token).then((res)=> {
-        document.getElementById('apiRespons').innerText = `${res}`
-    })
-})
-
-//const idForDelete = '651075750e5c508fde4ff029'
-//deleteProduct(devToken, idForDelete)
-//getEmails(devToken)
-//addProduct(devToken)
-/*
-*/
-// Dev Routs
-
-
-
-
 
 
 async function loginDev(firstPass, secondPass,thirdPass) {
@@ -136,7 +136,7 @@ async function regenerateToken (refreshtoken){
 
 regenerateToken(refreshToken).then(data=> (secondToken = data)).catch((e)=> console.log(e))
 secondToken = regenerateToken(refreshToken)
-console.log(secondToken)*/
+console.log(secondToken)
 
 
 async function logoutDev (token){
@@ -170,13 +170,9 @@ async function logoutAllDev (token){
     })
     const logoutMessage = await result.json()
     console.log(logoutMessage)
-}
+}*/
 
 // Products 
-
-
-
-
 
 
 async function getAllProducts() {
@@ -191,27 +187,4 @@ async function getAllDestaquedProducts() {
     })
     const dataAllDestaquedProducts = await result.json()
     if (dataAllDestaquedProducts) return dataAllDestaquedProducts
-}
-
-
-async function findOneProduct(id) {
-    const result = await fetch(`http://localhost:3000/products/${id}`).catch(e => {
-        console.log(e.error)
-    })
-    const dataOneProduct = await result.json()
-    if (dataOneProduct) return console.log(dataOneProduct)
-}
-
-async function getEmails (token){
-    const result = await fetch(`http://localhost:3000/user`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-    }).catch(e => {
-        console.log(e.error)
-    })
-    const dataProducts = await result.json()
-    console.log(dataProducts)
 }

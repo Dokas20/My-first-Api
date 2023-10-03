@@ -25,10 +25,10 @@ router.get('/user', devControler.checktoken, userControler.findAllUsers)
 
 // Dev routs
 
-router.post('/dev/login', devControler.loginDev)
+router.post('/dev/login', devControler.loginDev)/*
 router.post('/dev/refresh', devControler.generateAcessToken)
 router.delete('/dev/logout', devControler.checktoken,devControler.logoutDev)
-router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDev)
+router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDev)*/
 
 // Prod Routs
 

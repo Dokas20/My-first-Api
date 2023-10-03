@@ -16,19 +16,29 @@ putAllInformations(token)
 function putAllInformations(token){
     getEmails(token).then((users) => {
         printUserslogedNumber(users)
-        if(users.length < 10){  
-            for(let c = 0; c< users.length; c++){
-                printEmails(users[c])
-            }
+        if(users.length < 20){  
+            users.map((a)=>printEmails(a))
         } else{
-            for(let c = 0; c< 10; c++){
+            sohwAllEmails()
+            for(let c = 0; c< 20; c++){
                 printEmails(users[c])
+                document.getElementById('showAll').addEventListener('click', ()=>{
+                    document.getElementById('nameAndProduct').innerHTML= ''
+                    users.map((a)=>printEmails(a) )
+                })
             }
 
             
         }
     })
 }
+function sohwAllEmails(){
+    const btn = document.createElement('div')
+    btn.innerHTML = ` <div id="showAll">Mostrar todos os emails </div>`
+
+    const container = document.getElementById('informations')
+    container.append(btn)
+}   
 
 async function getEmails (token){
     const result = await fetch(`http://localhost:3000/user`, {
@@ -62,7 +72,9 @@ function printEmails(prod){
 }
 
 function printUserslogedNumber(dataUsers){
-    const userLenght = document.getElementById('informations')
-    userLenght.innerHTML = `Número de usuários logados:   <strong>${dataUsers.length} </strong>.`
+    const container = document.getElementById('informations')
+    const userLenght = document.createElement('p')
+    userLenght.innerHTML = `Número de usuários logados: <strong>${dataUsers.length} </strong>.`
+    container.append(userLenght)
 }
 

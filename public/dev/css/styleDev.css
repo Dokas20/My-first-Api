@@ -98,16 +98,27 @@ div#Destaqued,div#allProducts{
     align-items: center;
 }
 .productsDiv{
+    position: relative;
     margin: 10px;
     padding: 10px;
+    height: 100px;
+
     border: 1px solid black;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
 }
-.productsDiv img{
-    height: 50%;
-    width: 50%;
+.productsDiv div img{
+    position: absolute;
+    height: 90%;
+    width: 25%;
+    right: 3%;
+    top: 5%;
     background-color: rgba(0, 0, 0, 0.297);
+}
+.productsDiv div{
+    max-width: 200px;
+    overflow: hidden;
 }
 
 #addProduct{
@@ -209,7 +220,9 @@ div#Destaqued,div#allProducts{
     height: 5%;
     text-align: center;
     font-size: 1.1em;
-    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 .emailBox{
     display: flex;
