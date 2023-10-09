@@ -9,8 +9,8 @@ const storage = multer.diskStorage({
         const prodName = await Prod.findOne({name: name})
         if(!prodName){
             //cb(null,__dirname +  "/uploads")
-            cb(null,"uploads/")
-        }
+            cb(null,"public/uploads/")
+        }else return
     },
     
     filename:async function(req, file,cb){
@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
         const prodName = await Prod.findOne({name: name})
         if(!prodName){
             cb(null,/* file.fieldname*/ Date.now() + path.extname(file.originalname))
-        }
+        } else return
     }
 })
 const upload = multer({storage:storage})

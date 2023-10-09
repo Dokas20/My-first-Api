@@ -15,7 +15,7 @@ router.post('/car' ,userControler.checktoken,carControler.createCar)
 router.patch('/car/addProduct',userControler.checktoken,carControler.addProduct)
 router.patch('/car/delete/:prodId',userControler.checktoken, carControler.removeProdByCar)
 router.patch('/car/quantity/:prodId/:qut',userControler.checktoken, carControler.quantityChange)
-router.get('/car',userControler.checktoken, carControler.findProduct)
+router.get('/car',userControler.checktoken, carControler.findCar)
 
 // User Routs
 
@@ -40,7 +40,7 @@ router.delete('/products/:id',devControler.checktoken, prodControler.remove)
 router.patch('/products',devControler.checktoken,prodControler.uploadDestaqued)
 
 // Payment Routs
-router.post('/create-checkout-session' ,userControler.checktoken, paymentControler.test)
+router.post('/create-checkout-session' ,userControler.checktoken, paymentControler.generatePaymentLink)
 router.get('/checkout-session', paymentControler.checkoutSession)
 
 

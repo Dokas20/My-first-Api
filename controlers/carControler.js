@@ -77,7 +77,7 @@ exports.removeProdByCar = async (req, res) => {
     } 
 
 
-exports.findProduct = async (req, res) => {    
+exports.findCar = async (req, res) => {    
     try {
         
         const userId = req.id

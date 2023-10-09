@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const Prod= require('../models/prodModls')
 const Car = require('../models/carModel')
 
-exports.test = async (req,res) => {
+exports.generatePaymentLink = async (req,res) => {
 
 
   try {
@@ -24,43 +24,38 @@ exports.test = async (req,res) => {
       const id = car[0].products[a]._id
       const prod = await Prod.findOne({_id: id})
       
+      
       const token = prod.priceInCents
+       
 
-
-      if(!token){
-          return res.status(401).json({msg:"Acesso negado!"})
-      }
       try {
-          jwt.verify(token, process.env.SECRET, (err, price)=> {
-              if(err) return res.status(403).json({msg: "expired Token"})
-              req.pric = price.price
-            })    
+        jwt.verify(token, process.env.SECRET, (err, price)=> {
+          if(err) return res.status(403).json({msg: err})
+          const name = prod.name
+          const description = prod.description
+          const priceInCents = price.price
+          const quantity = car[0].products[a].quantity
+    
+          const line_item =     {
+            price_data: {
+              currency: 'eur',
+              unit_amount : priceInCents ,
+              product_data: {
+                name: name,
+                description: description
+              },
+            },
+            quantity: quantity,
+          }
+          line_items.push(line_item)
+          })    
     
         } catch (error) {
           res.status(400).json({msg: "Token inválido"})
         } 
 
-
-      const name = prod.name
-      const description = prod.description
-      const priceInCents = req.pric
-      const quantity = car[0].products[a].quantity
-
-
-      const line_item =     {
-        price_data: {
-          currency: 'eur',
-          unit_amount : priceInCents ,
-          product_data: {
-            name: name,
-            description: description
-          },
-        },
-        quantity: quantity,
-      }
-      line_items.push(line_item)
+        
     }
-
     const session = await stripe.checkout.sessions.create({
       line_items:  line_items,
       billing_address_collection: 'required',

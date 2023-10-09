@@ -57,19 +57,6 @@ function showTheFirstInformations(){
     })
     
 }
-const prod = {
-    src : "uploads/1694784987631.jpg"
-}
-//createImage(prod)
-    function createImage(prod) {
-        let img = document.getElementById('img');
-        let devImage = new Image();
-        devImage.src = `../${prod.src}`;
-        devImage.setAttribute('width', '300px');
-        devImage.setAttribute('height', '300px');
-        img.appendChild(devImage);
-
-     }
 
 function createProdPost(prod, apendConst){
     const div = document.createElement('div')

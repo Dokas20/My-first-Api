@@ -46,7 +46,8 @@ function createProdPost(prod){
     const select = document.createElement('select')
     const h1 = document.createElement('h1')
     const description = document.createElement('p')
-    const img= document.createElement('img')
+    const  newImg = new Image()
+    newImg.src= `../${prod.src}`
     const delet= document.createElement('div')
     const validDtqu = document.createElement('div')
 
@@ -67,16 +68,15 @@ function createProdPost(prod){
     }
 
     //stock.innerText = prod.stock
-    delet.innerHTML=`<div class="deleteDiv"><img src="#" alt=""></div>`
+    delet.innerHTML=`<h2>&#10060; </h2>`
     h1.innerText= prod.name
-    description.innerHTML = `<p>${prod.description}</p><p>Stock: ${prod.stock}</p>`
-    img.innerHTML = `<img src='../../${prod.src}' alt="Product Img">`
-    validDtqu.innerHTML = `<div id="validBtn"><img src="#" alt=""></div>`
+    description.innerHTML = `<p style = " max-height: 40px;">${prod.description}</p><p>Stock: ${prod.stock}</p>`
+    validDtqu.innerHTML = `<div id="validBtn"><h2>&#10004 </h2> </div>`
 
     
     div1.appendChild(h1)
     div1.appendChild(description)
-    div.append(img)
+    div.append(newImg)
     div1.append(div2)
     div1.append(delet)
     div2.append(select)
@@ -101,6 +101,7 @@ function createProdPost(prod){
 
     const container = document.getElementById('container')
     container.appendChild(mainDiv)
+    return console.log(prod)
 }
 
 async function changeDestaque(_id,destq){
