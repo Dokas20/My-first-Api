@@ -7,8 +7,6 @@ exports.createProd= async (req,res)=> {
     try {
         const {destaque,name,description, price,priceInCents, stock} = req.body
         const file = req.files;
-        const path = file[0].path
-        const src = path.slice(7);
         const prodName = await Prod.findOne({name: name})
         if(prodName)return res.status(404).json({msg: "Produto com nome identico ja criado"})
 
@@ -20,7 +18,7 @@ exports.createProd= async (req,res)=> {
             price,
             priceInCents:priceToken,
             stock,
-            src: src
+            src: file[0].path
         })
 
         await prod.save()

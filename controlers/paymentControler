@@ -56,15 +56,23 @@ exports.generatePaymentLink = async (req,res) => {
 
         
     }
-    const session = await stripe.checkout.sessions.create({
-      line_items:  line_items,
+    const valid = []
+    line_items.map((e)=> {
+      const price = e.price_data.unit_amount
+      if(price.length < 3 ||  price < 100){
+        valid.push('no')
+      }
+    })
+    if(valid.length === 0){
+      const session = await stripe.checkout.sessions.create({
+        line_items:  line_items,
       billing_address_collection: 'required',
       success_url: `http://localhost:3000/success.html`,
       cancel_url: `http://localhost:3000/cancel.html`,
       mode: 'payment'
     }) ;
     res.json(200, session.url )
-
+  } else return res.json('invalid request')
 
 } catch (error) {
     res.status(500).json({ message: error })

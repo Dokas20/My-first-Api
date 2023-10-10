@@ -92,3 +92,13 @@ footer a:hover{
     border-radius: 5px;
     padding: 2px;
 }
+
+#Shadow{
+    position: absolute;
+    width: 350px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
+    transform: rotate(-6deg) translate(65px, -25px);
+}

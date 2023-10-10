@@ -47,7 +47,8 @@ function createProdPost(prod){
     const h1 = document.createElement('h1')
     const description = document.createElement('p')
     const  newImg = new Image()
-    newImg.src= `../${prod.src}`
+    const src = prod.src.slice(7);
+    newImg.src= `../${src}`
     const delet= document.createElement('div')
     const validDtqu = document.createElement('div')
 

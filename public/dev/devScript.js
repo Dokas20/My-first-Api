@@ -64,8 +64,9 @@ function createProdPost(prod, apendConst){
     const divForInfo = document.createElement('div')
     const h1 = document.createElement('h1')
     const description = document.createElement('p')
+    const src = prod.src.slice(7);
     const  newImg = new Image()
-    newImg.src= `../${prod.src}`
+    newImg.src= `../${src}`
 
     // Test
     newImg.setAttribute('width', '300px');
