@@ -14,29 +14,38 @@ const menuAnimation = btnHamb.addEventListener('click', ()=>{
     
 }) */
 
+btnHamb.addEventListener('click', () => {
 
-btnHamb.addEventListener('click', async () => {
-    //getAllProducts()
-    //getAllDestaquedProducts()
-    const idForOneProduct = '6509cd333ca238760bdb5e09'
-    findOneProduct(idForOneProduct)
-    //sigInUser(name,email,password)
-    const email = 'duarteffsilva08@gmail.comm'
-    const password = 'DOKASdokas'
 
-    LoginUser(email, password).then(token =>(userToken = token) ).catch((e) => console.log(e))
+    document.getElementById('menu').classList.toggle('menuShow')
 
-    userToken= await LoginUser(email, password)
-    //createCar (userToken)
-    const _id = '65045ddb47c8ea5991c51682'
-    const quantity = "1"
-    //removeProduct (userToken,_id)
-    //addProduct (userToken,_id,quantity)
-    //quantityChange (userToken,_id,quantity)
-    //searchCar (userToken)
-    checkoutSession(userToken).then(url => window.location = url)
 })
 
+document.getElementById('main').addEventListener('click', ()=> {
+        document.getElementById('menu').classList.remove('menuShow')
+    
+})
+
+/*
+//getAllProducts()
+//getAllDestaquedProducts()
+const idForOneProduct = '6509cd333ca238760bdb5e09'
+findOneProduct(idForOneProduct)
+//sigInUser(name,email,password)
+const email = 'duarteffsilva08@gmail.comm'
+const password = 'DOKASdokas'
+
+LoginUser(email, password).then(token =>(userToken = token) ).catch((e) => console.log(e))
+
+userToken= await LoginUser(email, password)
+//createCar (userToken)
+const _id = '65045ddb47c8ea5991c51682'
+const quantity = "1"
+//removeProduct (userToken,_id)
+//addProduct (userToken,_id,quantity)
+//quantityChange (userToken,_id,quantity)
+//searchCar (userToken)
+checkoutSession(userToken).then(url => window.location = url)*/
 // Public Routs
 
 async function getAllProducts() {

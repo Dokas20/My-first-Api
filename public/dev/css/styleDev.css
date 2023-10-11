@@ -45,10 +45,6 @@ main{
     font-size: 1.2em;
 
 }
-#menu a:hover,#menu a:active {
-    color: white;
-    background-color:  rgba(126, 163, 149, 0.651);
-}
 #menuDiv,
 #menuDiv::before,
 #menuDiv::after {

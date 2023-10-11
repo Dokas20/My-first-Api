@@ -24,49 +24,63 @@ body{
 header{
     width: 100%;
     background-color: var(--color_2);
-    height: 10%;
+    height: 7%;
+    display: flex;
+    align-items: center;
+
+}
+
+#menu a {
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding: 5px;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: var(--color_4);
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+
 }
-nav{
+.menuHide{
     display: none;
 }
-.navShow{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+
+@keyframes showMenu{
+    from {
+    transform: translateY(-100%);
 }
-.headerNav{
-    height: 20dvh;
-    max-height: 100px;
-    width: 100%;
+    to{
+        transform: translateY(0%);
+    }
 }
-.headerNav a{
-    height: 100%;
-    width: 100%;
-    background-color: var(--color_3);
-    border: 1px solid black;
-    color: black;
-    text-align: center;
-    background-color: var(--color_1);
-    margin:  1px 0px ;
-    box-shadow: inset 1px 1px 10px 5px rgba(0, 0, 0, 0.050);
+
+.menuShow{
+    display: block;
+    animation-name: showMenu;
+    animation-duration: 4s;
 }
-.headerNav a:active{
-    background-color: var(--color_2);
-    color: var(--color_1);
+#menuHamburger,
+#menuHamburger::before,
+#menuHamburger::after {
+  margin-left: 30px;
+  display: block;
+  background-color: var(--color_1);
+  height: 5px;
+  width: 25px;
+  border-radius: 5px;
 }
-.headerNav a:hover{
-    padding: 2px;
+
+#menuHamburger::before {
+    content: '';
+    margin-top: -8px;
+    margin-left: 00px;
 }
-#menuHamburger{
-    background-color: black;
-    height: 20px;
-    width: 20px;
+#menuHamburger::after {
+    content: '';
+    margin-top: 11px;
+    margin-left: -00px;
 }
+
 a{
     color: white;
     text-decoration: none;
