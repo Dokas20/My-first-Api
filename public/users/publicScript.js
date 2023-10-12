@@ -15,16 +15,57 @@ const menuAnimation = btnHamb.addEventListener('click', ()=>{
 }) */
 
 btnHamb.addEventListener('click', () => {
-
-
     document.getElementById('menu').classList.toggle('menuShow')
-
 })
 
 document.getElementById('main').addEventListener('click', ()=> {
         document.getElementById('menu').classList.remove('menuShow')
     
 })
+printDestaquedProducts()
+async function printDestaquedProducts(){
+    const container = document.getElementById('productsContainer')
+
+    const products = await getAllDestaquedProducts()
+    products.map((prod) => createProdPost(prod, container))
+}
+function createProdPost(prod, apendConst){
+
+    const div = document.createElement('div')
+    const divForImg = document.createElement('div')
+    const divForInfo = document.createElement('div')
+    const h1 = document.createElement('h1')
+    const description = document.createElement('p')
+    const price = document.createElement('p')
+    const src = prod.src.slice(7);
+    const  newImg = new Image()
+    newImg.src= `../${src}`
+
+    newImg.setAttribute('width', '300px');
+    newImg.setAttribute('height', '300px');
+    divForImg.setAttribute('id', 'prodImg');
+    
+    h1.innerText= prod.name
+    description.innerText = prod.description
+    price.innerHTML = `<p> <strong>${prod.price}</strong> </p>` 
+   
+    divForInfo.appendChild(h1)
+    divForInfo.appendChild(description)
+    divForInfo.appendChild(price)
+    divForImg.append(newImg)
+    div.append(divForImg)
+    div.append(divForInfo)
+    div.classList.add('productsDiv')
+    apendConst.appendChild(div)
+
+    div.addEventListener('click', ()=> {
+        sessionStorage.setItem('prodId', `${prod._id}`)
+        window.location = 'http://localhost:3000/users/oneProd.html'
+    })
+}
+
+
+
 
 /*
 //getAllProducts()
@@ -59,16 +100,7 @@ async function getAllDestaquedProducts() {
         console.log(e.error)
     })
     const dataAllDestaquedProducts = await result.json()
-    if (dataAllDestaquedProducts) return console.log(dataAllDestaquedProducts)
-}
-
-
-async function findOneProduct(id) {
-    const result = await fetch(`http://localhost:3000/products/${id}`).catch(e => {
-        console.log(e.error)
-    })
-    const dataOneProduct = await result.json()
-    if (dataOneProduct) return console.log(dataOneProduct)
+    return dataAllDestaquedProducts
 }
 
 // Login User routs 
@@ -136,23 +168,7 @@ async function removeProduct (token,_id){
     console.log(removeProductMessage)
 }
 
-async function addProduct (token,_id,quantity){
-    const result = await fetch(`http://localhost:3000/car/addProduct`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            prodId : _id,
-            qut: quantity
-        })
-    }).catch(e => {
-        console.log(e.error)
-    })
-    const addProductMessage = await result.json()
-    console.log(addProductMessage)
-}
+
 
 async function quantityChange (token,_id,quantity){
     const result = await fetch(`http://localhost:3000/car/quantity/${_id}/${quantity}`, {

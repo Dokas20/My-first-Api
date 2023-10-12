@@ -7,29 +7,56 @@
 }
 :root{
     --color_1: rgb(255, 255, 255);
-    --color_2: rgb(0, 57, 171);
+    --color_2: rgb(25, 84, 203);
     --color_3: rgb(0,0,0);
-    --color_4: rgb(198, 236, 255);
+    --color_4: rgb(193, 91, 60);
+    --color_5: rgb(211, 211, 211);
     --h1_letter_size: 20px;
     --h2_letter_size: 16px;
     --p_letter_size: 1.1em;
     --line_height_1: 2em;
     --line_height_2: 1em;
+    --products_heigth: 400px;
+    --products_width: calc(var(--products_heigth)/1.2);
 }
 body{
     height: 100dvh;
     width: 100dvw;
     background-color: var(--color_1);
+    overflow-x: hidden;
 }
 header{
-    width: 100%;
-    background-color: var(--color_2);
+    background-color: var(--color_3);
     height: 7%;
     display: flex;
     align-items: center;
-
+    
+}
+main{
+    width: 100dvw;
+    height: 100%;
 }
 
+a{
+    color: white;
+    text-decoration: none;
+    font-size: var(--p_letter_size);
+}
+h1{
+    color: var(--color_2);
+    line-height: var(--line_height_1);
+}
+
+#Shadow{
+    position: absolute;
+    width: 350px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
+    transform: rotate(-6deg) translate(65px, -25px);
+}
+/*Menu*/
 #menu a {
     display: flex;
     justify-content: center;
@@ -45,19 +72,8 @@ header{
     display: none;
 }
 
-@keyframes showMenu{
-    from {
-    transform: translateY(-100%);
-}
-    to{
-        transform: translateY(0%);
-    }
-}
-
 .menuShow{
     display: block;
-    animation-name: showMenu;
-    animation-duration: 4s;
 }
 #menuHamburger,
 #menuHamburger::before,
@@ -80,19 +96,130 @@ header{
     margin-top: 11px;
     margin-left: -00px;
 }
-
-a{
+/*  Call to action  */
+#seeProducts{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    height: 100%;
+    width: 50%;
+    background-color: var(--color_2);
     color: white;
-    text-decoration: none;
-    font-size: var(--p_letter_size);
+    font-size: 1.2em;
+    font-weight: 600;
+    
 }
-h1{
-    color: var(--color_2);
-    line-height: var(--line_height_1);
+#login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    height: 100%;
+    width: 50%;
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+    font-weight: 600;
+    background-color: transparent;
+    border: 3px solid var(--color_2);
 }
+#btnDiv{
+    width: 100%;
+    height: 7%;
+    display: flex;
+}
+/*  Prod Session in Main page */
+#Producsts{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 36px;
+    background-color: var(--color_1);
+    padding: 10px;
+    
+}
+#line{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    height: 2px;
+    background-color: rgb(167, 167, 167);
+}
+#Producsts h1{
+    color: black;
+    font-weight: 600;
+    size: 1em;
+}
+#productsContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productsDiv{
+    padding: 10px;
+    margin: 10px;
+    width: var(--products_width);
+    height: var(--products_heigth);
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    
+}
+#prodImg{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.productsDiv div img{
+    background-color: rgba(108, 108, 108, 0.297);
+    width: 90%;
+}
+/*  One Prod Page */
+#prodSession{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#imgContainer, #infoContainer{
+    width: 60%;
+}
+
+
+#btnAddCart{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    width: 50%;
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+    font-weight: 600;
+    background-color: var(--color_3);
+    padding: 10px;
+
+}
+#btnAddCart:hover{
+
+    background-color: transparent;
+    border: 2px solid var(--color_3);
+    color: var(--color_3);
+
+}
+
+
+
+
+
+
+/*  Footer */
 
 footer{
-    position: absolute;
     width: 100%;
     bottom: 0%;
     background-color: rgb(47, 47, 47);
@@ -105,14 +232,4 @@ footer a:hover{
     color: var(--color_3);
     border-radius: 5px;
     padding: 2px;
-}
-
-#Shadow{
-    position: absolute;
-    width: 350px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.05);
-    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
-    transform: rotate(-6deg) translate(65px, -25px);
 }
