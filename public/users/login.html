@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="userLS.css">
+    <script src="LoginAndSigIn.js" defer></script>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <h1>Login</h1>
+        <form id="loginUser" action="" method="post" autocomplete="off">
+
+            <session id="containerInputs"><!--
+                <label for="iname">User name</label>
+                <input type="text" name="name" id="iname" required>-->
+
+                <label for="iemail"> Email</label>
+                <input type="text" name="email" id="iemail" required>
+
+                <label for="ipass"> password</label>
+                <input type="password" name="pass" id="ipass" required minlength="8" maxlength="22">
+            </session>
+            <input type="submit" value="Submit" id="isubmit">
+        </form>
+    <div id="sigIn"></div>
+    <div id="apiResponse"></div>
+    </main>
+</body>
+
+</html>

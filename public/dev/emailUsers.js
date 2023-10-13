@@ -27,7 +27,6 @@ function putAllInformations(token){
                     users.map((a)=>printEmails(a) )
                 })
             }
-
             
         }
     })

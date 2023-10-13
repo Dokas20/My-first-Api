@@ -52,8 +52,7 @@ btnAddCart.addEventListener('click', ()=> {
 const innerBtn = btnAddCart.innerText
 
 if(innerBtn == 'Faça o login de Usuário'){
-
-        console.log('heba')
+    btnAddCart.setAttribute('href', './login.html')
 } else{
      if(!token){
                 btnAddCart.innerText = 'Faça o login de Usuário'

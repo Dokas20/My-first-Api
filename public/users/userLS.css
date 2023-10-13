@@ -1,0 +1,80 @@
+@charset "UTF-8";
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+:root{
+    --color_1: rgb(255, 255, 255);
+    --color_2: rgb(240, 240, 240);
+    --color_3: rgb(0,0,0);
+    --color_4: rgb(193, 91, 60);
+    --color_5: rgb(211, 211, 211);
+    --h1_letter_size: 20px;
+    --h2_letter_size: 16px;
+    --p_letter_size: 1.1em;
+    --line_height_1: 2em;
+    --line_height_2: 1em;
+    --main_heigth: 500px;
+    --main_width: calc(var(--main_heigth)/1.2);
+}
+body{
+    height: 100dvh;
+    width: 100dvw;
+    background-color: var(--color_1);
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    max-height: var(--main_heigth);
+    max-width: var(--main_width);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--color_2);
+    border-radius: 12px;
+}
+#containerInputs{
+    display: flex;
+    flex-direction: column;
+}
+/* Form CSS*/
+form {
+    align-self: center;
+    width: 80%;
+    max-width: 400px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+form input{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    background-color: transparent;
+    font-size: 1.2em;
+    width: 90%;
+}
+
+label {
+    font-size: 1em;
+    padding: 5px;
+}
+
+/* Inputs*/
+#submit, #sigIn{
+    background-color: black;
+    height: 10px;
+    width: 50px;
+}
