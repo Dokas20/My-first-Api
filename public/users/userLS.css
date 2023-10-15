@@ -73,8 +73,9 @@ label {
 }
 
 /* Inputs*/
-#submit, #sigIn{
+#sigIn a{
     background-color: black;
     height: 10px;
     width: 50px;
+    color: white;
 }
