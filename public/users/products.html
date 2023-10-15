@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="products.js" defer></script>
+</head>
+<body>
+    <header id="header">
+        <div id="logo"></div>
+        <div id="menuHamburger"></div>
+    </header>
+    <section>
+        <nav class="menuHide"  id="menu">
+            <a href="emailUsers.html">EmailUsers</a> 
+            <a href="prod.html" target="_self" rel="next">Producsts</a>   
+            <a href="">developers</a>
+            <a href="">payment</a>
+        </nav>
+    </section>
+    <main id="main">
+        <section id="searchSection">
+                <input type="text" name="search" id="isearch">
+                <div id="allProdSubmit"></div> 
+            </section>
+            <section id="filterSection">
+                <div id="filterHide"></div> <br>
+            <div id="priceFilter" class="menuHide">
+                <label for="iPriceMin">Preço Mínimo</label>
+                <input type="range" name="pricemin" id="iPriceMin"  step="5" min="0" max="100">
+                <label for="iPriceMax">Preço Máximo</label>
+                <input type="range" name="iPriceMax" id="iPriceMax" step="5"    min="100" max="1000">
+                <div>
+                    <p> <span id="minPiceDiv">50</span>-<span id="maxPiceDiv">500</span></p>
+                </div>
+            </div>
+        </section>
+            
+        <section id="prodContainer"></section>
+    </main>
+</body>
+</html>
