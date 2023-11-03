@@ -7,11 +7,11 @@
 }
 :root{
     --color_1: rgb(255, 255, 255);
-    --color_2: rgb(25, 84, 203);
+    --color_2: rgb(208, 31, 31);
     --color_3: rgb(0,0,0);
     --color_4: rgb(193, 91, 60);
-    --color_5: rgb(211, 211, 211);
-    --h1_letter_size: 20px;
+    --color_5: rgb(0, 0, 0);
+    --h1_letter_size: 2.4em;
     --h2_letter_size: 16px;
     --p_letter_size: 1.1em;
     --line_height_1: 2em;
@@ -33,7 +33,7 @@ header{
     width: 100%;
     display: flex;
     align-items: center;
-    
+    justify-content: space-between;   
 }
 main{
     display: flex;
@@ -44,20 +44,6 @@ a{
     color: white;
     text-decoration: none;
     font-size: var(--p_letter_size);
-}
-h1{
-    color: var(--color_2);
-    line-height: var(--line_height_1);
-}
-
-#Shadow{
-    position: absolute;
-    width: 350px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.05);
-    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
-    transform: rotate(-6deg) translate(65px, -25px);
 }
 /*Menu*/
 #menu a {
@@ -81,24 +67,60 @@ h1{
 #menuHamburger,
 #menuHamburger::before,
 #menuHamburger::after {
-  margin-left: 30px;
+  margin-left: 15px;
   display: block;
   background-color: var(--color_1);
-  height: 5px;
-  width: 25px;
+  height: 6px;
+  width: 35px;
   border-radius: 5px;
 }
-
 #menuHamburger::before {
     content: '';
-    margin-top: -8px;
+    margin-top: -11px;
     margin-left: 00px;
 }
 #menuHamburger::after {
     content: '';
-    margin-top: 11px;
+    margin-top: 16px;
     margin-left: -00px;
 }
+#logo{
+    height: 30px;
+    width: 30px;
+    margin-right: 15px;
+}
+/*      HERO SESSION        */
+
+
+#hero h1{
+    color: var(--color_3);
+    /*line-height: var(--line_height_1);*/
+    padding: 10px;
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: var(--h1_letter_size);
+    
+}
+#hero{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#mainImg{
+    width: 90%;
+    max-width: 500px;
+    min-width: 300px;
+    margin: auto;
+} 
+#hero p {
+    margin-left: 10px;
+    margin-top: 16px;
+    padding: 10px;
+    color: black;
+
+}
+
+
 /*  Call to action  */
 #seeProducts{
     display: flex;
@@ -111,7 +133,9 @@ h1{
     color: white;
     font-size: 1.2em;
     font-weight: 600;
-    
+    padding: 15px;
+    border: 3px solid var(--color_2);
+    margin: 0px 1px 0px 5px;
 }
 #login{
     display: flex;
@@ -125,14 +149,31 @@ h1{
     font-weight: 600;
     background-color: transparent;
     border: 3px solid var(--color_2);
+    padding: 15px;
+    margin: 0px 5px 0px 1px;
+}
+#login:hover{
+    background-color: var(--color_2);
+    color: white;
+    border-radius: 5px;
+    
+}
+#seeProducts:hover{
+    color: black;
+    background-color: transparent;
+    border-radius: 7px;
+    
 }
 #btnDiv{
+    margin-top: 32px;
     width: 100%;
     height: 7%;
     display: flex;
 }
+
 /*  Prod Session in Main page */
 #Producsts{
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -140,26 +181,42 @@ h1{
     align-items: center;
     margin-top: 36px;
     background-color: var(--color_1);
-    padding: 10px;
+    padding: 0px;
     
 }
 #line{
+    position: absolute;
+    z-index: 1;
+    top: 80px;
     display: flex;
     width: 100%;
     align-items: center;
-    height: 2px;
-    background-color: rgb(167, 167, 167);
+    height: 1px;
+    box-shadow: 0px 20px 100px 5px black;
 }
-#Producsts h1{
-    color: black;
-    font-weight: 600;
-    size: 1em;
+#Producsts h1#shoesH1{
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    size: 2em;
+    width: 100%;
+    padding: 35px 0px;
+    background-color: var(--color_3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px 15px 0px 0px;
 }
 #productsContainer{
+    position: absolute;
+    top: 100px;
+    z-index: 1;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+#prodInfo{
+    color: rgb(0, 0, 0);
 }
 
 .productsDiv{
@@ -167,7 +224,7 @@ h1{
     margin: 10px;
     width: var(--products_width);
     height: var(--products_heigth);
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.782);
     display: flex;
     flex-direction: column;
     
@@ -241,7 +298,7 @@ h1{
 
 
 
-/*  Footer */
+/*  Footer 
 
 footer{
     width: 100%;
@@ -250,6 +307,7 @@ footer{
     color: white;
     padding: 2px;
     text-align: center;
+    position: absolute;
 }
 footer a:hover{
     background-color: var(--color_1);
@@ -257,3 +315,4 @@ footer a:hover{
     border-radius: 5px;
     padding: 2px;
 }
+*/

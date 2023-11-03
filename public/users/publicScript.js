@@ -48,6 +48,8 @@ function createProdPost(prod, apendConst){
     h1.innerText= prod.name
     description.innerText = prod.description
     price.innerHTML = `<p> <strong>${prod.price}</strong> </p>` 
+    price.setAttribute('id', 'prodInfo')
+    description.setAttribute('id', 'prodInfo')
    
     divForInfo.appendChild(h1)
     divForInfo.appendChild(description)
@@ -101,42 +103,6 @@ async function getAllDestaquedProducts() {
     })
     const dataAllDestaquedProducts = await result.json()
     return dataAllDestaquedProducts
-}
-
-// Login User routs 
-
-async function sigInUser(name, email, password) {
-    const result = await fetch(`http://localhost:3000/user/register`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password
-        })
-    }).catch(e => {
-        console.log(e.error)
-    })
-    const siginReturn = await result.json()
-    if (siginReturn) return console.log(siginReturn)
-}
-async function LoginUser(email, password) {
-    const result = await fetch(`http://localhost:3000/user/login`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
-    }).catch(e => {
-        console.log(e.error)
-    })
-    const LoginUserReturn = await result.json()
-    return LoginUserReturn.token
 }
 
 // Car routs
