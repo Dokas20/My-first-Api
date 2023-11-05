@@ -1,15 +1,16 @@
+
 const btn = document.getElementById('btnDiv')
 const navId = document.getElementById('navId')
 const serchInputDiv = document.getElementById('searchContainer')
+const serchInput = document.getElementById('isearch')
 const btnFilter = document.getElementById('filterContainer')
 const filterSession = document.getElementById('filterSection')
 const prodContain = document.getElementById('prodContainer')
 const contain = document.getElementById('menuContain')
 
-//serchInput.addEventListener('input', ()=> {})
 
 btn.addEventListener('click', ()=> {
-
+    
     if(navId.classList.value){
         navId.style.display = 'none'
         document.getElementById('main').classList.remove('opacicity')
@@ -27,18 +28,16 @@ btn.addEventListener('click', ()=> {
         document.getElementById('menuLeave').classList.remove('notNav')
         navId.style.display = 'none'
         document.getElementById('main').classList.remove('opacicity')
-
+        
     })
 
 })
 
 
 
-
-
 serchInputDiv.addEventListener('click', ()=> {
     document.getElementById('line').classList.remove('navHide')
-
+    
 })
 btnFilter.addEventListener('click', ()=> {
     filterSession.style.display= 'block'
@@ -81,6 +80,34 @@ document.getElementById('resetBtn').addEventListener('click', ()=> {
 
 
 
+
+
+const setTime = []
+const setTimeLenht = setTime.length
+serchInput.addEventListener('click', async ()=> {
+ setTimeout(()=> {searchForShoes()},3000);
+ 
+})
+serchInput.addEventListener('input', ()=> {
+    functionAWED()
+})
+
+function functionAWED(){
+    searchForShoes().then((prod)=> {console.log(prod)})
+
+}
+
+    
+
+async function searchForShoes (){
+    const searchValue = serchInput.value
+    prodContain.innerHTML= ''
+    var regEx = new RegExp(`${searchValue}`, "i")
+    const shoes = await getAllProducts()
+    
+
+    //console.log(shoes)
+}
 
 printAllShoes()
 async function printAllShoes (){
