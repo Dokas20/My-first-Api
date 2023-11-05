@@ -1,4 +1,4 @@
-
+const apendConst = document.getElementById('prodContainer')
 const btn = document.getElementById('btnDiv')
 const navId = document.getElementById('navId')
 const serchInputDiv = document.getElementById('searchContainer')
@@ -8,6 +8,9 @@ const filterSession = document.getElementById('filterSection')
 const prodContain = document.getElementById('prodContainer')
 const contain = document.getElementById('menuContain')
 
+const aplyFilter = document.getElementById('filterForm')
+const radioFilter = document.getElementsByName('Ordenar')
+const priceFilter = document.getElementsByName('priceLimits')
 
 btn.addEventListener('click', ()=> {
     
@@ -75,44 +78,136 @@ document.getElementById('resetBtn').addEventListener('click', ()=> {
 
 
 /*  API AND DEEP JAVASCRIPT*/
-
-
-
-
-
-
-
-const setTime = []
-const setTimeLenht = setTime.length
-serchInput.addEventListener('click', async ()=> {
- setTimeout(()=> {searchForShoes()},3000);
- 
-})
-serchInput.addEventListener('input', ()=> {
-    functionAWED()
-})
-
-function functionAWED(){
-    searchForShoes().then((prod)=> {console.log(prod)})
-
-}
-
-    
-
-async function searchForShoes (){
-    const searchValue = serchInput.value
-    prodContain.innerHTML= ''
-    var regEx = new RegExp(`${searchValue}`, "i")
+const dataShoes = []
+atributeShoes()
+async function atributeShoes(){
     const shoes = await getAllProducts()
-    
-
-    //console.log(shoes)
+    dataShoes.push(shoes)
 }
+
+async function getAllProducts() {
+    const result = await fetch("http://localhost:3000/products").catch(e => { console.log(e.error) })
+
+    const dataAllProducts = await result.json()
+    return dataAllProducts
+}
+
+
+const shoesValue = []
+const filterArray = []
+serchInput.addEventListener('click', async ()=> {
+    const shoes =  dataShoes[0]
+    for(let a = 0; a< 200; a++){
+        const time = 3000 + a*3000
+        setInterval(time, shoes)
+        console.log(a)
+    }
+})
+function setInterval(time, shoes){
+        setTimeout(()=> {
+            if(serchInput.value != shoesValue){
+                searchForShoes(shoes)
+            }
+        }, time)
+    }
+    
+    async function searchForShoes (shoes){
+    const searchValue = serchInput.value
+    var regEx = new RegExp(`${searchValue}`, "i")
+    shoesValue[0]= searchValue
+    prodContain.innerHTML= ''
+    console.log(shoes)
+    if (filterArray.length == 0){
+
+        shoes.map((shoe) => {
+            const name = shoe.name
+            if(name.match(regEx)){
+                console.log(name)
+                createProdPost(shoe, apendConst)
+            }
+        })
+    } else {
+        const minPrice = filterArray[0]
+        const maxPrice = filterArray[1]
+        
+        shoes.map((shoe) => {
+            let name = shoe.name
+            let price = shoe.price
+            if(name.match(regEx) && price >= minPrice && price <= maxPrice){
+                console.log(name)
+                createProdPost(shoe, apendConst)
+            }
+        })
+    }
+}
+
+/*  FIlter   */
+
+
+aplyFilter.addEventListener('submit',async (e)=> {
+    e.preventDefault()
+    filterSession.style.display= 'none'
+    prodContain.style.display= 'flex'
+    const radioFilterValue = []
+    if(radioFilter[0].checked){
+        radioFilterValue[0] ='Recomendado'
+    }
+    else if(radioFilter[1].checked){
+        radioFilterValue[0] ='PreçoMenor'
+    }
+    else if(radioFilter[2].checked){
+        radioFilterValue[0] ='PreçoMaior'
+    }
+    const minPrice = priceFilter[0].value
+    const maxPrice = priceFilter[1].value
+    
+    const shoes = dataShoes[0]
+    const recomendShoes = await getAllProducts()
+    
+    if(radioFilterValue[0] != 'Recomendado')
+    {
+        sortPrice(shoes, radioFilterValue[0])
+        aplyFilters(shoes , minPrice, maxPrice)
+    }else {
+        aplyFilters(recomendShoes , minPrice, maxPrice)
+    }
+})
+
+function aplyFilters(shoes, minPrice, maxPrice){
+    prodContain.innerHTML= ''
+    shoes.map((prod) => {
+        const searchValue = serchInput.value
+        var regEx = new RegExp(`${searchValue}`, "i")
+        const price = prod.price
+        if(prod.name.match(regEx) && price >= minPrice && price <= maxPrice)
+        {
+            createProdPost(prod, apendConst)
+        }
+    })
+    filterArray[0] = minPrice
+    filterArray[1] = maxPrice
+}
+
+function sortPrice (shoes, minMax){
+    if(minMax == 'PreçoMaior'){
+        shoes.sort( (p1, p2) => (p1.price < p2.price) ? 1 : (p1.price > p2.price) ? -1 : 0)
+        
+        
+    } else if(minMax == 'PreçoMenor'){
+        
+        let sortedProducts = shoes.sort( (p1, p2) => (p1.price > p2.price) ? 1 : (p1.price < p2.price) ? -1 : 0)
+        return sortedProducts
+    }
+    
+}
+
+
+
+
 
 printAllShoes()
 async function printAllShoes (){
     const shoes = await getAllProducts()
-    const apendConst = document.getElementById('prodContainer')
     shoes.map((prod)=> { createProdPost(prod,apendConst)})
 }
 
@@ -146,13 +241,6 @@ function createProdPost(prod, apendConst){
         sessionStorage.setItem('prodId', `${prod._id}`)
         window.location = 'http://localhost:3000/users/oneProd.html'
     })   */
-}
-
-async function getAllProducts() {
-    const result = await fetch("http://localhost:3000/products").catch(e => { console.log(e.error) })
-
-    const dataAllProducts = await result.json()
-    return dataAllProducts
 }
 
 

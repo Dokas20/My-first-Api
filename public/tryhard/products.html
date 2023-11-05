@@ -48,25 +48,21 @@
                     <label for="Ordenar"><h2>Ordenar por</h2></label>
     
                     <div id="orderContain">
-                        <div class="eachOrder">
-                            <input type="radio" name="Ordenar" id="recente" >
-                            <label for="recente">Mais recente</label>
-                        </div>
     
                         <div class="eachOrder">
-                            <input type="radio" name="Ordenar" id="Recomendado" >
+                            <input type="radio" name="Ordenar" id="Recomendado" checked>
                             <label for="Recomendado">Recomendado</label>
-                        </div>
-    
-                        <div class="eachOrder">
-                            <input type="radio" name="Ordenar" id="PreçoMaior" >
-                            <label for="PreçoMaior">Preço: maior</label>
                         </div>
     
                         <div class="eachOrder">
                             <input type="radio" name="Ordenar" id="PreçoMenor" >
                             <label for="PreçoMenor">Preço: menor</label>
                         </div>
+                        <div class="eachOrder">
+                            <input type="radio" name="Ordenar" id="PreçoMaior" >
+                            <label for="PreçoMaior">Preço: maior</label>
+                        </div>
+    
                     </div>
                     <div id="lineFilter"></div>
     
@@ -75,12 +71,12 @@
     
                         <div class="priceRange">
                             <label for="iPriceMin">Preço mínimo:</label>
-                            <input type="range" name="pricemin" id="iPriceMin"  step="5" min="0" max="100">
+                            <input type="range" name="priceLimits" id="iPriceMin"  step="5" min="0" max="100">
                             <span class="minPiceDiv">50</span>
                         </div>
                         <div class="priceRange">
                             <label for="iPriceMax">Preço máximo:</label>
-                            <input type="range" name="iPriceMax" id="iPriceMax" step="10"    min="100" max="1000">
+                            <input type="range" name="priceLimits" id="iPriceMax" step="10"    min="100" max="900">
                             <span class="maxPiceDiv">500</span>
                         </div>
                         <div>
