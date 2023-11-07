@@ -236,11 +236,11 @@ function createProdPost(prod, apendConst){
     div.append(divForInfo)
     apendConst.appendChild(div)
     div.classList.add('productsContainer')
-    /*
+    
     div.addEventListener('click', ()=> {
         sessionStorage.setItem('prodId', `${prod._id}`)
-        window.location = 'http://localhost:3000/users/oneProd.html'
-    })   */
+        window.location = 'http://localhost:3000/tryhard/productSingel.html'
+    })   
 }
 
 
