@@ -2,7 +2,6 @@ const multer = require('multer')
 const path = require('path')
 const Prod= require('../models/prodModls')
 
-
 const storage = multer.diskStorage({
     destination:async function(req,file,cb){
         const name = req.body.name

@@ -32,13 +32,16 @@ router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDe
 
 // Prod Routs
 
-router.post('/products' ,devControler.checktoken,upload.array("files"),prodControler.createProd)
+router.post('/products' ,devControler.checktoken,upload.array("file"),prodControler.createProd)
 router.get('/products', prodControler.findAll )
-router.get('/products/destaqued', prodControler.sercheAllDestaquedProducts )
+router.patch('/products/:id', prodControler.addPopularity)
+/*
+router.get('/products/destaqued', prodControler.sercheAllDestaquedProducts )*/
 router.get('/products/:id', prodControler.findOne)
 router.delete('/products/:id',devControler.checktoken, prodControler.remove)
+/*
 router.patch('/products',devControler.checktoken,prodControler.uploadDestaqued)
-
+*/
 // Payment Routs
 router.post('/create-checkout-session' ,userControler.checktoken, paymentControler.generatePaymentLink)
 router.get('/checkout-session', paymentControler.checkoutSession)

@@ -5,18 +5,21 @@ require('dotenv').config()
 
 exports.createProd= async (req,res)=> {
     try {
-        const {destaque,name,description, price,priceInCents, stock} = req.body
+        const {name,description,extraInfo, price, avaliation,priceInCents,
+            stock} = req.body
         const file = req.files;
         const prodName = await Prod.findOne({name: name})
         if(prodName)return res.status(404).json({msg: "Produto com nome identico ja criado"})
 
         const priceToken = jwt.sign({price: priceInCents}, process.env.SECRET)
         const prod = new Prod({
-            destaque,
             name,
             description,
+            extraInfo,
             price,
             priceInCents:priceToken,
+            avaliation,
+            popularity: 0,
             stock,
             src: file[0].path
         })
@@ -29,6 +32,19 @@ exports.createProd= async (req,res)=> {
     }
     
 } 
+exports.addPopularity = async (req,res) => {
+    try {
+        const id = req.params.id
+        const product = await Prod.find({_id:id},'-priceInCents') 
+        const popular = product[0].popularity +1
+
+        const modification = await  Prod.updateOne({_id:id},{$set:{popularity:popular}})
+        return res.status(200).json('Popularity add whit sucesse' + modification)
+        
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+}
 exports.findAll = async (req,res)=> {
     try {
         const products = await Prod.find({},'-priceInCents') 
@@ -54,6 +70,7 @@ exports.findOne = async (req,res)=> {
         res.status(500).json({message: `Produto não encontrado ${error}`})
     }
 }
+/*
 exports.findDestaquedAll = async (req,res)=> {
     try {
         const products = await Prod.find({destaque:true},'-priceInCents') 
@@ -66,7 +83,7 @@ exports.findDestaquedAll = async (req,res)=> {
         res.status(500).json({message: `Produtos não encontrado ${error}`})
     }
 }
-
+*/
 
 exports.remove = async (req,res)=> {
     try {
@@ -84,6 +101,7 @@ exports.remove = async (req,res)=> {
         res.status(500).json({message: error})
     }
 }
+/*
 exports.uploadDestaqued = async (req,res)=> {
 
     try {
@@ -96,7 +114,7 @@ exports.uploadDestaqued = async (req,res)=> {
     } catch (error) {
         res.status(500).json({message: `Produto não encontrado ${error}`})
     }
-}
+}   
 
 exports.sercheAllDestaquedProducts = async (req,res)=> {
     try {
@@ -109,7 +127,7 @@ exports.sercheAllDestaquedProducts = async (req,res)=> {
     } catch (error) {
         res.status(500).json({message: `Produtos não encontrado ${error}`})
     }
-}
+}*/
 
 
 
