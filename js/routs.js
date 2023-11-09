@@ -32,7 +32,7 @@ router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDe
 
 // Prod Routs
 
-router.post('/products' ,devControler.checktoken,upload.array("file"),prodControler.createProd)
+router.post('/products' ,devControler.checktoken,upload.array("files"),prodControler.createProd)
 router.get('/products', prodControler.findAll )
 router.patch('/products/:id', prodControler.addPopularity)
 /*

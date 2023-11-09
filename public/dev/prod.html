@@ -27,23 +27,23 @@
 <section id="addProduct">
             
     <form action="#" method="get" autocomplete="on" id="addProductForm">
-    <label for="destaque">Destaque:</label>
-    <select name="destaque" id="destaque">
-        <option value="True">True</option>
-        <option value="False">False</option>
-    </select> <br>
     <label for="idname">Nome:</label>
     <input type="text" name="name" id="idname" required maxlength="22"> <br>
     <label for="iddesc">Descrição:</label>
     <input type="text" name="desc" id="iddesc" required> <br>
+    <label for="idextraInfo">Informação extra:</label>
+    <input type="text" name="info" id="idextraInfo" required> <br>
+    <label for="idAvaliation">Avaliação:</label>
+    <input type="text" name="avaliation" id="idAvaliation" required> <br>
+
     <label for="idprice">Preço:</label>
     <input type="number" name="Price" id="idprice" required> <br>
     <label for="idpriceCents">Preço em cêntimos:</label>
     <input type="number" name="priceCents" id="idpriceCents" required>   <br>
     <label for="idstock">Stock:</label>
-    <input type="number" name="Stock" id="idstock" required> <br>
+    <input type="text" name="Stock" id="idstock" required> <br>
     <label for="idimage">Imagem:</label>
-    <input type="file" name="Image" id="idimage" required>   <br>
+    <input type="file" name="Image" id="idimage" required multiple>   <br>
     <input type="submit" value="Enviar" id="btnToken">
 </form>
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="name" id="iname">
+    <input type="file" name="file" id="ifile" multiple>
+    <input type="submit" value="Submit" id="btnSubmit">
+    <script>
+        const btnSubmit = document.getElementById('btnSubmit')
+        btnSubmit.addEventListener('click',()=> {
+            let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXNzIjoiZm1YZnNLbWJSQjUyU2NtME9Mcm5KWnhvT3M5dk1id1Z0T3l6WE5ibTJZY2tVTUIzTVFaenlORGFqRjl0T2hNWnZ1Tk9LZmdENWZUTzdWTDFEYW5Gd3FoY1JDcjFHTmZnT3ZWbyIsImlhdCI6MTY5OTQ2MDQ0NSwiZXhwIjoxNjk5NDc0ODQ1fQ.Pe_cmLgzoTHPiXif4kGPbdTAf_snKl91-g2OsmQvLkA'
+            addProduct(token)
+        })
+        async function addProduct(devToken){
+            const files = document.getElementById('ifile')
+            const name = document.getElementById('iname').value
+
+            
+            const formData = new FormData();
+            formData.append("name", name)
+            for(let i =0; i < files.files.length; i++) {
+                formData.append("files", files.files[i]);
+            }
+            
+            const result = await fetch(`http://localhost:3000/products/`, {
+                method: "POST",
+                headers: {
+        //"Content-Type": "application/json",
+                    Authorization: `Bearer ${devToken}`
+                },
+                body: formData,
+        
+            })
+            const data =await result.json()
+            console.log(data)
+            return data
+        }
+        </script>
+</body>
+</html>

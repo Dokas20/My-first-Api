@@ -137,20 +137,22 @@ async function getAllProducts() {
 
 async function addProduct(devToken){
     const files = document.getElementById('idimage')
-    const destaqued = document.getElementById('destaque').value
+
     const name = document.getElementById('idname').value
+    const avaliation = document.getElementById('idAvaliation').value
+    const extraInfo = document.getElementById('idextraInfo').value
     const description = document.getElementById('iddesc').value
     const price = document.getElementById('idprice').value
     const priceInCents = document.getElementById('idpriceCents').value
     const stock = document.getElementById('idstock').value
-    let destaque = (destaqued.toLowerCase() === 'true')
     
     const formData = new FormData();
-    formData.append("destaque",destaque)
     formData.append("name", name)
     formData.append("description", description)
+    formData.append("extraInfo",extraInfo)
     formData.append("price", price)
     formData.append("priceInCents", priceInCents)
+    formData.append("avaliation",avaliation)
     formData.append("stock", stock)
     for(let i =0; i < files.files.length; i++) {
         formData.append("files", files.files[i]);
