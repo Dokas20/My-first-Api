@@ -25,12 +25,7 @@ btn.addEventListener('click', ()=> {
     })
 
 })
-printdMostPopularShoes()
-async function printdMostPopularShoes (){
-    const shoes = await getAllDestaquedProducts()
-    const apendConst = document.getElementById('containerPopular')
-    shoes.map((prod)=> { createProdPost(prod,apendConst)})
-}
+
 
 function createProdPost(prod, apendConst){
 
@@ -74,11 +69,5 @@ async function getAllProducts() {
     const dataAllProducts = await result.json()
     if (dataAllProducts) return console.log(dataAllProducts)
 }
-async function getAllDestaquedProducts() {
-    const result = await fetch("http://localhost:3000/products/destaqued").catch(e => {
-        console.log(e.error)
-    })
-    const dataAllDestaquedProducts = await result.json()
-    return dataAllDestaquedProducts
-}
+
 

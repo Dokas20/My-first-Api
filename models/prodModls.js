@@ -12,6 +12,6 @@ const ProductSchema = new Schema({
     avaliation: {type: Number, require: true},
     popularity: {type: Number, require: true},
     stock: {type: Array, require: true},
-    src: {type: String, require: true},
+    src: {type: Array, require: true},
 })
 module.exports = mongoose.model("Prod", ProductSchema)

@@ -18,8 +18,11 @@ document.getElementById('btnAddProduct').addEventListener('click', ()=> {
     const session = document.getElementById('addProduct')
     session.style.display= "block"
 })
-document.getElementById('addProductForm').addEventListener('submit', (e)=> {
+document.getElementById('addProductForm').addEventListener('submit', async (e)=> {
     e.preventDefault()
+    const data = await addProduct(token)
+    console.log(data)
+    /*
     addProduct(token).then((res)=> {
         document.getElementById('apiRespons').style.color= "blue"
         
@@ -27,7 +30,7 @@ document.getElementById('addProductForm').addEventListener('submit', (e)=> {
     })
     document.getElementById('apiRespons').innerText = 'Exite um produto com nome idêntico já criado'
     
-    document.getElementById('apiRespons').style.color= "red"
+    document.getElementById('apiRespons').style.color= "red"*/
 })
 
 function showTheALLProducts (){
@@ -157,6 +160,7 @@ async function addProduct(devToken){
     for(let i =0; i < files.files.length; i++) {
         formData.append("files", files.files[i]);
     }
+    
     
     const result = await fetch(`http://localhost:3000/products/`, {
         method: "POST",

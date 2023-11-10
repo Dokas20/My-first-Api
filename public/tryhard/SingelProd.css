@@ -117,13 +117,22 @@ header img{
     height: 10dvh;
     max-height: 80px;
     min-height: 64px;
-    width: 100dvw;
-    background-color: #3043E9;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
 }
 #imgProd{
     height: 100%;
     width: 100%;
     object-fit: contain;
+}
+#img1Style, #img4Style, #img3Style, #img2Style{
+    height: 10dvh;
+    max-height: 80px;
+    min-height: 64px;
+    width: 25dvw;
+    object-fit: contain;
+    border: 1px solid black;
 }
 
 

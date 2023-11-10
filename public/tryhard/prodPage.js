@@ -218,7 +218,7 @@ function createProdPost(prod, apendConst){
     const divForInfo = document.createElement('div')
     const h1 = document.createElement('p')
     const price = document.createElement('p')
-    const src = prod.src.slice(7);
+    const src = prod.src[0].slice(7);
     const  newImg = new Image()
     newImg.src= `../${src}`
 
