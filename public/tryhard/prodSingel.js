@@ -36,14 +36,12 @@ async function setInformations (){
     const description = dataProd.description
     const extraInfo = dataProd.extraInfo
     const avaliation = dataProd.avaliation
+    const avaliationString = avaliation.toString()
     const price = `${dataProd.price} $`
     const src = dataProd.src[0].slice(7);
     const  newImg = new Image()
     newImg.src= `../${src}`
     newImg.setAttribute('id', 'imgProd')
-/*
-    document.getElementById('mainImg').innerHTML = `<img src="../${dataProd.src[0].slice(7)}" alt="imagen do produto">`
-*/
 
     const nameContain = document.getElementById('nameContain')
     const descriptionContain = document.getElementById('descritionP')
@@ -54,19 +52,82 @@ async function setInformations (){
     const img2 = document.getElementById('img2')
     const img3 = document.getElementById('img3')
     const img4 = document.getElementById('img4')
-
-    img1.style.width= '25px'
-    img1.style.height= '25px'
-
-    img1.innerHTML =  `<img id="img1Style" src="../${dataProd.src[1].slice(7)}" alt="imagen do produto">`
-    img2.innerHTML =  `<img id="img2Style" src="../${dataProd.src[1].slice(7)}" alt="imagen do produto">`
-    img3.innerHTML =  `<img id="img3Style" src="../${dataProd.src[2].slice(7)}" alt="imagen do produto">`
-    img4.innerHTML =  `<img id="img4Style" src="../${dataProd.src[2].slice(7)}" alt="imagen do produto">`
+    const avaliationContain = document.getElementById('avaliation')
+    img1.innerHTML =  `<img class="imgStyle" src="../${dataProd.src[0].slice(7)}" alt="imagen do produto">`
+    img2.innerHTML =  `<img class="imgStyle" src="../${dataProd.src[1].slice(7)}" alt="imagen do produto">`
+    img3.innerHTML =  `<img class="imgStyle" src="../${dataProd.src[2].slice(7)}" alt="imagen do produto">`
+    img4.innerHTML =  `<img class="imgStyle" src="../${dataProd.src[3].slice(7)}" alt="imagen do produto">`
     extraInfoContain.innerText = extraInfo
     nameContain.innerHTML = name
     descriptionContain.innerHTML = description
     priceContain.innerHTML = price
     imgContain.append(newImg)
+    
+    //const roundAvaliation = Math.round(avaliation)
+    const roundAvaliationString = avaliationString.slice(0, -2)
+    const roundAvaliation = Number(roundAvaliationString)
+    const roundAvaliationPlus = roundAvaliation+1
+    console.log(roundAvaliationPlus)
+    const arrayAvaliation = []
+    const star1 = document.createElement('span')
+    const star2 = document.createElement('span')
+    const star3 = document.createElement('span')
+    const star4 = document.createElement('span')
+    const star5 = document.createElement('span')
+    let starDiferent = ''
+    for(let i = 1; i<=5; i++){
+        if(i <= roundAvaliation){
+            arrayAvaliation.push('f')
+        }
+        else if(roundAvaliationPlus == i){
+            starDiferent= i
+            arrayAvaliation.push('f')
+        }
+        else{
+            arrayAvaliation.push('')
+        }
+    }
+    console.log(starDiferent)
+
+    star1.innerHTML  = `&star${arrayAvaliation[0]};`
+    star2.innerHTML  = `&star${arrayAvaliation[1]};`
+    star3.innerHTML  = `&star${arrayAvaliation[2]};`
+    star4.innerHTML  = `&star${arrayAvaliation[3]};`
+    star5.innerHTML  = `&star${arrayAvaliation[4]};`
+ 
+    star1.classList.add('starStyle')
+    star2.classList.add('starStyle')
+    star3.classList.add('starStyle')
+    star4.classList.add('starStyle')
+    star5.classList.add('starStyle')
+
+    if(starDiferent == 1){
+        star1.classList.remove('starStyle')
+        star1.classList.add('detailedStar')
+    }
+    if(starDiferent == 2){
+        star2.classList.remove('starStyle')
+        star2.classList.add('detailedStar')
+    }
+    if(starDiferent == 3){
+        star3.classList.remove('starStyle')
+        star3.classList.add('detailedStar')
+    }
+    if(starDiferent == 4){
+        star4.classList.remove('starStyle')
+        star4.classList.add('detailedStar')
+    }
+    if(starDiferent == 5){
+        star5.classList.remove('starStyle')
+        star5.classList.add('detailedStar')
+    }
+
+
+    avaliationContain.append(star1)
+    avaliationContain.append(star3)
+    avaliationContain.append(star2)
+    avaliationContain.append(star4)
+    avaliationContain.append(star5)
 }
 
 async function findOneProduct(id) {

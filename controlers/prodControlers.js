@@ -96,7 +96,10 @@ exports.remove = async (req,res)=> {
 
         if(!product){ return res.status(404).json({message: "Produto não encontrado"})}
 
-        fs.unlinkSync(product.src)
+
+        for(let a = 0; a<4; a++){
+            fs.unlinkSync(product.src[a])
+        }
 
         await Prod.deleteOne({_id:id})
 

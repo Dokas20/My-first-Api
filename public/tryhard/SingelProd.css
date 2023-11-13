@@ -126,14 +126,16 @@ header img{
     width: 100%;
     object-fit: contain;
 }
-#img1Style, #img4Style, #img3Style, #img2Style{
+.imgStyle{
+    object-fit: contain;
+    padding: var(--micro_GAP);
     height: 10dvh;
     max-height: 80px;
     min-height: 64px;
     width: 25dvw;
-    object-fit: contain;
-    border: 1px solid black;
+    border: 1px solid black;    
 }
+
 
 
 /*  Info */
@@ -158,11 +160,18 @@ header img{
     font-weight: 700;
 }
 #avaliation{
-    margin: var(--light_GAP)  var(--main_GAP);
-    width: var(--bolder_GAP);
-    height: var(--micro_GAP);
-    background-color: black;
+    margin: 0  var(--main_GAP);
 }
+.starStyle{
+    color: rgb(199, 199, 0);
+    font-size: 24px;
+}
+.detailedStar {
+    font-size: 24px;
+    background: linear-gradient(-0.25turn, #eee,  rgb(199, 199, 0) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
 /*  callToAction    */
 

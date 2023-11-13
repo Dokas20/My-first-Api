@@ -240,7 +240,15 @@ function createProdPost(prod, apendConst){
     div.addEventListener('click', ()=> {
         sessionStorage.setItem('prodId', `${prod._id}`)
         window.location = 'http://localhost:3000/tryhard/productSingel.html'
+        addPopularity(prod._id)
     })   
+}
+
+async function addPopularity(id){
+    const result = await fetch(`http://localhost:3000/products/${id}`, { method: "PATCH"}).catch(e => { console.log(e.error) })
+    
+    const dataAllProducts = await result.json()
+    return dataAllProducts
 }
 
 
