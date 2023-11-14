@@ -1,6 +1,7 @@
 const btn = document.getElementById('btnDiv')
 const navId = document.getElementById('navId')
 const contain = document.getElementById('menuContain')
+const addCarBtn = document.getElementById('callToAction')
 
 btn.addEventListener('click', ()=> {
     
@@ -137,3 +138,24 @@ async function findOneProduct(id) {
     const data = result.json()
     return data
 }
+
+addCarBtn.addEventListener('click', ()=> {
+    const arrayProdValid = []
+    const idStoredNumber = localStorage.length
+    if(idStoredNumber == 0){
+        localStorage.setItem('id_0', `${prodId}`);
+    } else {
+
+        for( let a = 0; a< idStoredNumber; a++){
+            const item = localStorage.getItem(`id_${a}`)
+            console.log(item)
+            if(item == prodId){
+                arrayProdValid.push('1')
+            } 
+    }
+
+        if(arrayProdValid.length == 0){
+            localStorage.setItem(`id_${idStoredNumber}`, `${prodId}`);
+        }
+    }
+})

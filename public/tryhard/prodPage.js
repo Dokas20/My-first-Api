@@ -78,6 +78,8 @@ document.getElementById('resetBtn').addEventListener('click', ()=> {
 
 
 /*  API AND DEEP JAVASCRIPT*/
+
+
 const dataShoes = []
 atributeShoes()
 async function atributeShoes(){
@@ -200,10 +202,6 @@ function sortPrice (shoes, minMax){
     }
     
 }
-
-
-
-
 
 printAllShoes()
 async function printAllShoes (){
