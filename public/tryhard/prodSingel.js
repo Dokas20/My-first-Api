@@ -158,4 +158,4 @@ addCarBtn.addEventListener('click', ()=> {
             localStorage.setItem(`id_${idStoredNumber}`, `${prodId}`);
         }
     }
-})
+})  

@@ -59,7 +59,9 @@ function createProdPost(prod, apendConst){
     }) 
 }
 
-
+document.getElementById('btnLupa').addEventListener('click',() => {
+    window.location = 'http://localhost:3000/tryhard/products.html'
+})
 
 
 
