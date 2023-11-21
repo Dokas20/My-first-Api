@@ -108,25 +108,7 @@ header img{
     display: none;
 }
 
-/*
-.navShow a {
-    display: block;
-    background-color:var(--mainColor);
-    border: 1px solid var(--contrastColor);
-    text-decoration: none;
-    padding: var(--light_GAP);
-    color: var(--contrastColor);
-}
-.navShow a:hover{
-    transform: scale(1.1);
-    background-image: linear-gradient( to right ,#eeeeee, white);
-} 
-.navShow a:active{
-    background-image: none;
-    background-color: #c5c5c5;
-    color: var(--mainColor);
-    transform: scale(1.12);
-} */
+
 #navId{
 
     display: none;

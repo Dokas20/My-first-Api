@@ -24,14 +24,12 @@ btn.addEventListener('click', ()=> {
         document.getElementById('main').classList.remove('opacicity')
         
     })
-
+    
 })
 
-
-const prodId = sessionStorage.getItem('prodId')
+const dataProd = JSON.parse(sessionStorage.getItem('prod'))
 setInformations()
 async function setInformations (){
-    const dataProd = await findOneProduct(prodId)
 
     const name = dataProd.name
     const description = dataProd.description
@@ -64,6 +62,7 @@ async function setInformations (){
     priceContain.innerHTML = price
     imgContain.append(newImg)
     
+
     //const roundAvaliation = Math.round(avaliation)
     const roundAvaliationString = avaliationString.slice(0, -2)
     const roundAvaliation = Number(roundAvaliationString)
@@ -141,45 +140,63 @@ async function setInformations (){
         printStockShoes(shoeNumber, disponivel)
     }
 }
+
+class PordutoCarrinho {
+    constructor(prodId, size,allSize ,  quantity, src , name , price) {
+        this._prodId = prodId
+        this._size = size
+        this._allSize = allSize
+        this._quantity = quantity
+        this._src = src
+        this._name = name
+        this._price = price
+    }
+}
+
+const prodInfo = []
+
+
 function printStockShoes (number, dis){
     const contain = document.getElementById('stockContain')
-
+    
     const numberContain = document.createElement('div')
     if(dis == true){
-
+        
         numberContain.innerHTML = `<div id="i${number}" class="shoeNumberContain"> <p class="shoeNumber">${number}</p></div>`
     }
     else{
         return
     }
     contain.append(numberContain)
-}
 
-async function findOneProduct(id) {
-    const result = await fetch(`http://localhost:3000/products/${id}`).catch(e => {
-        console.log(e.error)
+    numberContain.addEventListener('click', ()=> {
+        prodInfo[0] = new PordutoCarrinho(dataProd._id, number ,dataProd.stock, 1,   dataProd.src[0].slice(7) , dataProd.name, dataProd.price)
     })
-    const data = result.json()
-    return data
 }
 
 addCarBtn.addEventListener('click', ()=> {
-    const arrayProdValid = []
-    const idStoredNumber = localStorage.length
-    if(idStoredNumber == 0){
-        localStorage.setItem('id_0', `${prodId}`);
-    } else {
+    let product  = prodInfo[0]
+    if(!product){
+        window.alert('mete o manbo nenghe')
+    } else{
 
-        for( let a = 0; a< idStoredNumber; a++){
-            const item = localStorage.getItem(`id_${a}`)
-            console.log(item)
-            if(item == prodId){
-                arrayProdValid.push('1')
-            } 
-    }
-
-        if(arrayProdValid.length == 0){
-            localStorage.setItem(`id_${idStoredNumber}`, `${prodId}`);
+        const arrayProdValid = []
+        const idStoredNumber = localStorage.length
+        if(idStoredNumber == 0){
+            localStorage.setItem(`id_0`,  JSON.stringify(product));
+        } else {
+            
+            for( let a = 0; a< idStoredNumber; a++){
+                const item = JSON.parse(localStorage.getItem(`id_${a}`))
+                if(item._prodId == product._prodId){
+                    arrayProdValid.push('1')
+                } 
+            }
+            if(arrayProdValid.length == 0){
+                
+             localStorage.setItem(`id_${idStoredNumber}`,  JSON.stringify(product));
+            
+            }
         }
     }
-})  
+    })  

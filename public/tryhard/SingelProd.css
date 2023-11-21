@@ -108,9 +108,9 @@ header img{
 
 /*Image*/
 #mainImg{
-    height: 40dvh;
-    max-height: 400px;
-    min-height: 302px;
+    height: 50dvh;
+    max-height: 464px;
+    min-height: 366px;
     width: 100dvw;
 }
 #moreImgs{
@@ -148,7 +148,7 @@ header img{
 }
 #nameContain{
     margin: 0px  var(--main_GAP);
-    padding: 4px 0px ;
+    padding: 2px 0px ;
 }
 #descritionP{
     font-size: var(--light_GAP);
@@ -157,19 +157,19 @@ header img{
 }
 
 #priceContain{
-    margin: var(--light_GAP)  var(--main_GAP);
+    margin: var(--light_GAP) 0px var(--micro_GAP) var(--main_GAP);
     font-weight: 700;
 }
 #avaliation{
     margin: 0  var(--main_GAP);
 }
 .starStyle{
-    color: rgb(199, 199, 0);
+    color: rgb(218, 233, 0);
     font-size: 24px;
 }
 .detailedStar {
     font-size: 24px;
-    background: linear-gradient(-0.25turn, #eee,  rgb(199, 199, 0) 100%);
+    background: linear-gradient(-0.25turn, #eee 30%,  rgb(218, 233, 0) );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -180,7 +180,7 @@ header img{
 #stockContain{
     display: flex;
     flex-wrap: wrap;
-    margin: var(--bolder_GAP) var(--main_GAP);
+    margin: var(--main_GAP) var(--main_GAP);
 }
 .shoeNumberContain{
     background-color: transparent;

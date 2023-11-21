@@ -211,6 +211,7 @@ async function printAllShoes (){
 
 function createProdPost(prod, apendConst){
 
+
     const div = document.createElement('div')
     const divForImg = document.createElement('div')
     const divForInfo = document.createElement('div')
@@ -236,7 +237,7 @@ function createProdPost(prod, apendConst){
     div.classList.add('productsContainer')
     
     div.addEventListener('click', ()=> {
-        sessionStorage.setItem('prodId', `${prod._id}`)
+        sessionStorage.setItem('prod', JSON.stringify(prod))
         window.location = 'http://localhost:3000/tryhard/productSingel.html'
         addPopularity(prod._id)
     })   

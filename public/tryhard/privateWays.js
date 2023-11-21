@@ -1,7 +1,7 @@
 const btn = document.getElementById('btnDiv')
 const navId = document.getElementById('navId')
 const contain = document.getElementById('menuContain')
-const prodContainer = document.getElementById('container')
+const prodContainer = document.getElementById('prodContainer')
 const products = localStorage 
 
 btn.addEventListener('click', ()=> {
@@ -28,26 +28,23 @@ btn.addEventListener('click', ()=> {
 
 })
 
-document.getElementById('btnLupa').addEventListener('click',() => {
+
+document.getElementById('searchContainer').addEventListener('click',() => {
     window.location = 'http://localhost:3000/tryhard/products.html'
 })
+
+
+
 
 if(products){
     const idStoredNumber = localStorage.length
     for( let a = 0; a< idStoredNumber; a++){
-        const item = localStorage.getItem(`id_${a}`)
-        findOneProduct(item)
+        let item = JSON.parse(localStorage.getItem(`id_${a}`))
+        createProdPost(item , prodContainer)
     }
     
 }else{
     
-}
-async function findOneProduct(id) {
-    const result = await fetch(`http://localhost:3000/products/${id}`).catch(e => {
-        console.log(e.error)
-    })
-    const data = await result.json()
-    createProdPost(data, prodContainer)
 }
 
 function createProdPost(prod, apendConst){
@@ -58,15 +55,39 @@ function createProdPost(prod, apendConst){
     const divForInfo = document.createElement('div')
     const h1 = document.createElement('p')
     const price = document.createElement('p')
-    const src = prod.src[0].slice(7);
+    const quantity = document.createElement('select')
+    const size = document.createElement('select')
+    const stock = prod._allSize
+    const src = prod._src;
     const  newImg = new Image()
     newImg.src= `../${src}`
 
+    quantity.innerHTML= `
+        <select name="quantity" id="iquantity">
+        <option value="1" selected>1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        </select>
+        `
+        const sizeOptions = ['']
 
-    h1.setAttribute('id', 'h1Prod')
+    for( let c =0; c< stock.length; c++){
+        let number = stock[c]        
+        let shoeNumber = 37+c 
+        if(number > 0){
+            sizeOptions[0] += ` <option value="${shoeNumber}">${shoeNumber}</option>`
+        }
+    }
+    size.innerHTML = `
+        <select name="quantity" id="iquantity">
+        ${sizeOptions[0]}
+        </select>
+    `
+
+
     
-    h1.innerText= prod.name
-    price.innerHTML = `<p>${prod.price} $</p>` 
+    h1.innerText= prod._name
+    price.innerHTML = `<p>${prod._price} $</p>` 
    
     divForInfo.appendChild(h1)
     divForInfo.appendChild(price)
@@ -75,10 +96,5 @@ function createProdPost(prod, apendConst){
     div.append(divForInfo)
     apendConst.appendChild(div)
     div.classList.add('productsContainer')
-    
-    div.addEventListener('click', ()=> {
-        sessionStorage.setItem('prodId', `${prod._id}`)
-        window.location = 'http://localhost:3000/tryhard/productSingel.html'
-        addPopularity(prod._id)
-    })   
+ 
 }
