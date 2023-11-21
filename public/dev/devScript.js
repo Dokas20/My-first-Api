@@ -1,11 +1,11 @@
 const btnSubmit = document.getElementById('isubmit')
 const token = sessionStorage.getItem('token')
+const from = document.getElementById('loginFormDev')
 
 
 if(!token){  
 
-    btnSubmit.addEventListener('click',async (e) => {
-        
+    from.addEventListener('submit',async (e) => {
         e.preventDefault()
         const firstPass= document.getElementById('iPass1').value
     const secondPass= document.getElementById('iPass2').value

@@ -147,7 +147,16 @@ async function addProduct(devToken){
     const description = document.getElementById('iddesc').value
     const price = document.getElementById('idprice').value
     const priceInCents = document.getElementById('idpriceCents').value
-    const stock = document.getElementById('idstock').value
+    const stk37 = document.getElementById('i37').value
+    const stk38 = document.getElementById('i38').value
+    const stk39 = document.getElementById('i39').value
+    const stk40 = document.getElementById('i40').value
+    const stk41 = document.getElementById('i41').value
+    const stk42 = document.getElementById('i42').value
+    const stk43 = document.getElementById('i43').value
+    const stk44 = document.getElementById('i44').value
+    const stock = [stk37,stk38,stk39,stk40,stk41,stk42,stk43,stk44]
+
     
     const formData = new FormData();
     formData.append("name", name)
@@ -156,12 +165,12 @@ async function addProduct(devToken){
     formData.append("price", price)
     formData.append("priceInCents", priceInCents)
     formData.append("avaliation",avaliation)
-    formData.append("stock", stock)
     for(let i =0; i < files.files.length; i++) {
         formData.append("files", files.files[i]);
     }
-    
-    
+    for(let i =0; i < stock.length; i++) {
+        formData.append("stock", stock[i])
+    }
     const result = await fetch(`http://localhost:3000/products/`, {
         method: "POST",
         headers: {

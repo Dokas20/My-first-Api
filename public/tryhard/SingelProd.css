@@ -125,6 +125,7 @@ header img{
     height: 100%;
     width: 100%;
     object-fit: contain;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.117);
 }
 .imgStyle{
     object-fit: contain;
@@ -172,6 +173,30 @@ header img{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+
+/*      SHOE NUMBERS        */
+
+#stockContain{
+    display: flex;
+    flex-wrap: wrap;
+    margin: var(--bolder_GAP) var(--main_GAP);
+}
+.shoeNumberContain{
+    background-color: transparent;
+    width: 96px;
+    height: 48px;
+    margin : 0px  0px 8px 8px;
+    border-radius: 3px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 1px 1px 6px 1px rgba(0, 0, 0, 0.04);
+}
+.shoeNumber{
+    font-size: 1.08em;
+}
 
 /*  callToAction    */
 

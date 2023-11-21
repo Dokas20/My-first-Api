@@ -68,7 +68,6 @@ async function setInformations (){
     const roundAvaliationString = avaliationString.slice(0, -2)
     const roundAvaliation = Number(roundAvaliationString)
     const roundAvaliationPlus = roundAvaliation+1
-    console.log(roundAvaliationPlus)
     const arrayAvaliation = []
     const star1 = document.createElement('span')
     const star2 = document.createElement('span')
@@ -88,7 +87,6 @@ async function setInformations (){
             arrayAvaliation.push('')
         }
     }
-    console.log(starDiferent)
 
     star1.innerHTML  = `&star${arrayAvaliation[0]};`
     star2.innerHTML  = `&star${arrayAvaliation[1]};`
@@ -129,6 +127,32 @@ async function setInformations (){
     avaliationContain.append(star2)
     avaliationContain.append(star4)
     avaliationContain.append(star5)
+
+    const stock = dataProd.stock
+    for(let a = 0 ; a< stock.length; a++){
+        let number = stock[a]        
+        let disponivel = ''
+        let shoeNumber = 37+a 
+        if(number > 0){
+            disponivel = true
+        } else {
+            disponivel = false
+        }
+        printStockShoes(shoeNumber, disponivel)
+    }
+}
+function printStockShoes (number, dis){
+    const contain = document.getElementById('stockContain')
+
+    const numberContain = document.createElement('div')
+    if(dis == true){
+
+        numberContain.innerHTML = `<div id="i${number}" class="shoeNumberContain"> <p class="shoeNumber">${number}</p></div>`
+    }
+    else{
+        return
+    }
+    contain.append(numberContain)
 }
 
 async function findOneProduct(id) {
