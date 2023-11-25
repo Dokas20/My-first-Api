@@ -174,4 +174,80 @@ header img{
     animation: lineClick 300ms;
 }
 
+#prodContainer{
+    display: flex;
+    flex-direction: column;
 
+}
+
+
+/*  prodContainer   */
+#productContainer  {
+    position: relative;
+    margin: var(--light_GAP) var(--main_GAP)  0px var(--main_GAP);
+    border: 1px solid black;
+    display: flex;
+    padding: var(--micro_GAP);
+}
+
+#divForInfo{
+    position: relative;
+    margin: 0px var(--micro_GAP);
+}
+#divForInfo p{
+    font-weight: 600;
+    font-size: var(--light_GAP);
+    margin-top: 4px;
+}
+#divForInfo h1{
+    font-size: 1.2em;
+    font-weight: 500;
+
+}
+#divForInfo div {
+    font-size: 0.8em;
+    font-weight: 600;
+    position: absolute;
+    display: flex;
+    bottom: 8px;
+    width: 100%;
+}
+#divForInfo div span{
+    display: flex;
+    margin: 0px 16px 0px 0px;
+}
+#divForInfo div span select {
+    margin: 0px 0px 0px 4px;
+    border: none;
+    background-color: rgb(244, 244, 244);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.106);
+}
+
+#productContainer img{
+    object-fit: contain;
+    width: 100px;
+    height: 100px;
+    margin: 0px var(--micro_GAP);
+    background-color: rgb(244, 244, 244);
+    border-radius: 12px;
+}
+
+#moveOutProd{
+    display: block;
+    background-color: black;
+    height: 5px;
+    width: 20px;
+    position: absolute;
+    right: 16px;
+  transform: translateY(8px) rotate(-45deg);
+}
+#moveOutProd::before{
+    content: '';
+    display: block;
+    background-color: black;
+    height: 5px;
+    width: 20px;
+    transform: rotate(90deg);
+
+}

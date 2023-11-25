@@ -49,52 +49,76 @@ if(products){
 
 function createProdPost(prod, apendConst){
 
-    console.log(prod)
     const div = document.createElement('div')
     const divForImg = document.createElement('div')
     const divForInfo = document.createElement('div')
-    const h1 = document.createElement('p')
+    const divForSlects = document.createElement('div')
+    const moveOutProd= document.createElement('div')
+    const spanSize = document.createElement('span')
+    const spanQunt = document.createElement('span')
+    const h1 = document.createElement('h1')
     const price = document.createElement('p')
-    const quantity = document.createElement('select')
-    const size = document.createElement('select')
+    const sizeTrulyOption = prod._size
     const stock = prod._allSize
     const src = prod._src;
     const  newImg = new Image()
     newImg.src= `../${src}`
-
-    quantity.innerHTML= `
-        <select name="quantity" id="iquantity">
-        <option value="1" selected>1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        </select>
-        `
         const sizeOptions = ['']
 
     for( let c =0; c< stock.length; c++){
         let number = stock[c]        
         let shoeNumber = 37+c 
-        if(number > 0){
+        if (sizeTrulyOption == shoeNumber){
+            sizeOptions[0] += ` <option value="${shoeNumber}" selected >${shoeNumber}</option>`
+        }else if(number > 0){
             sizeOptions[0] += ` <option value="${shoeNumber}">${shoeNumber}</option>`
         }
     }
-    size.innerHTML = `
-        <select name="quantity" id="iquantity">
-        ${sizeOptions[0]}
-        </select>
-    `
 
-
-    
+    spanQunt.innerHTML = ` <label for="iquantity"> Quantidade:</label>
+    <select name="quantity" id="iquantity">
+   <option value="1" selected>1</option>
+   <option value="2">2</option>
+   <option value="3">3</option>
+   </select>`
+    spanSize.innerHTML = `    <label for="isize"> Tamanho:</label>        <select name="size" id="isize">
+    ${sizeOptions[0]}
+    </select>`
     h1.innerText= prod._name
     price.innerHTML = `<p>${prod._price} $</p>` 
+
    
     divForInfo.appendChild(h1)
     divForInfo.appendChild(price)
+    divForSlects.appendChild(spanSize)
+    divForSlects.appendChild(spanQunt)
+    divForInfo.appendChild(moveOutProd)
     divForImg.append(newImg)
+    divForInfo.append(divForSlects)
     div.append(divForImg)
     div.append(divForInfo)
+    div.append(moveOutProd)
+    moveOutProd.setAttribute('id', 'moveOutProd')
+    div.setAttribute('id', 'productContainer')
+    divForInfo.setAttribute('id', 'divForInfo')
     apendConst.appendChild(div)
-    div.classList.add('productsContainer')
  
+
+    moveOutProd.addEventListener('click', ()=>{
+        div.style.display= 'none'
+        deleteProd(prod._prodId)
+    } )
+}
+function deleteProd(prodId){
+    const newProductsCar = []
+    for( let a = 0; a< products.length; a++){
+        let item = JSON.parse(localStorage.getItem(`id_${a}`))
+        if(item._prodId != prodId){
+            newProductsCar.push(item)
+        } 
+    }
+    localStorage.clear()
+    for(let c = 0; c< newProductsCar.length; c++){
+        localStorage.setItem(`id_${c}`,  JSON.stringify(newProductsCar[c]));
+    }
 }

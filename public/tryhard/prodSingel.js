@@ -175,7 +175,7 @@ function printStockShoes (number, dis){
 }
 
 addCarBtn.addEventListener('click', ()=> {
-    let product  = prodInfo[0]
+   let product  = prodInfo[0]
     if(!product){
         window.alert('mete o manbo nenghe')
     } else{
@@ -198,5 +198,5 @@ addCarBtn.addEventListener('click', ()=> {
             
             }
         }
-    }
+    } 
     })  
