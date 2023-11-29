@@ -35,20 +35,18 @@ document.getElementById('searchContainer').addEventListener('click',() => {
 
 
 
-
-if(products){
+if(products.length > 0){
     const idStoredNumber = localStorage.length
     for( let a = 0; a< idStoredNumber; a++){
         let item = JSON.parse(localStorage.getItem(`id_${a}`))
-        createProdPost(item , prodContainer)
+        createProdPost(item , prodContainer, a)
     }
     
-}else{
-    
+}else if(products.length == 0){
+    document.getElementById('noProducts').style.display= 'flex'
 }
 
-function createProdPost(prod, apendConst){
-
+function createProdPost(prod, apendConst, idNumber){
     const div = document.createElement('div')
     const divForImg = document.createElement('div')
     const divForInfo = document.createElement('div')
@@ -108,6 +106,15 @@ function createProdPost(prod, apendConst){
         div.style.display= 'none'
         deleteProd(prod._prodId)
     } )
+    spanSize.addEventListener('input', (e)=> {
+        let value = e.target.value
+        changeSize (value, prod , idNumber)
+    })
+    spanQunt.addEventListener('input', (e)=> {
+        let value = e.target.value
+        changeQuantity(value, prod , idNumber)
+        
+    })
 }
 function deleteProd(prodId){
     const newProductsCar = []
@@ -121,4 +128,14 @@ function deleteProd(prodId){
     for(let c = 0; c< newProductsCar.length; c++){
         localStorage.setItem(`id_${c}`,  JSON.stringify(newProductsCar[c]));
     }
+}
+function changeSize (value, prod, idNumber){
+    let product = prod
+    product._size = value
+    localStorage.setItem(`id_${idNumber}`, JSON.stringify(product))    
+}
+function changeQuantity (value, prod, idNumber){
+    let product = prod
+    product._quantity = value
+    localStorage.setItem(`id_${idNumber}`, JSON.stringify(product))    
 }
