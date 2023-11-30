@@ -72,12 +72,19 @@ function createProdPost(prod, apendConst, idNumber){
             sizeOptions[0] += ` <option value="${shoeNumber}">${shoeNumber}</option>`
         }
     }
+    const quantityOptions = ['']
+    for( let c =1; c< 4; c++){
+        let quantity = prod._quantity     
+        if (quantity == c){
+            quantityOptions[0] += ` <option value="${c}" selected >${c}</option>`
+        }else {
+            quantityOptions[0] += ` <option value="${c}">${c}</option>`
+        }
+    }
 
     spanQunt.innerHTML = ` <label for="iquantity"> Quantidade:</label>
     <select name="quantity" id="iquantity">
-   <option value="1" selected>1</option>
-   <option value="2">2</option>
-   <option value="3">3</option>
+    ${quantityOptions[0]}
    </select>`
     spanSize.innerHTML = `    <label for="isize"> Tamanho:</label>        <select name="size" id="isize">
     ${sizeOptions[0]}
@@ -139,3 +146,5 @@ function changeQuantity (value, prod, idNumber){
     product._quantity = value
     localStorage.setItem(`id_${idNumber}`, JSON.stringify(product))    
 }
+
+

@@ -285,3 +285,111 @@ header img{
     align-items: center;
     display: none;
 }
+
+
+/*  LOGIN   */
+#menuLinks{
+    width: 100%;
+    height: 64px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.452);
+}
+#logoImg {
+    width: 40px;
+    height: 40px;
+    margin-right: var(--main_GAP);
+}
+
+#voltar{
+    position: absolute;
+    top: 8px;
+    left: 22px;
+    height: 4px;
+    width: 24px;
+    transform: rotate(-45deg) translateY(400%);
+    background-color: black;
+}
+#voltar::before{
+    content: '';
+    display: block;
+    width: 24px;
+    height: 4px;
+    background-color: black;
+    transform: rotate(90deg)  translate(12px,11px);
+}
+#voltarContain{
+    height: 50px;
+    width: 40px;
+    margin: 30px;
+}
+h1{
+    font-size: 2em;
+    margin: var(--main_GAP);
+}
+#logInSection h1{
+    font-weight: 500;
+    font-size: 1.6em;
+    margin: 0px var(--main_GAP);
+}
+#inputs{
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--light_GAP);
+}
+#iemail, #ipass{
+    padding: 12px;
+    font-size: 1em;
+    margin: var(--micro_GAP) var(--main_GAP);
+    border: 1px solid rgba(0, 0, 0, 0.249);
+    border-radius: 12px;
+}
+#iemail:hover, #ipass:hover{
+    transform: scale(1.01);
+}
+label{
+    font-weight: 550;
+}
+#callToActions{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 24px var(--main_GAP);
+}
+#sigIn{
+    font-weight: 700;
+    font-size: 1.2;
+}
+#sigIn:hover{
+    font-weight: 500;
+}
+#calltoActioninLogin{
+    padding: 12px 32px;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.879);
+    transform: translateY(-25%);
+}
+#calltoActioninLogin:hover{
+    background-color: white;
+    color: rgba(0, 0, 0, 0.879);
+    border: 1px solid rgba(0, 0, 0, 0.835);
+}
+#inputSubmit{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-weight: 700;
+    font-size: 1em;
+}
+#inputSubmit:hover{
+    color: black;
+}
+#apiResponse{
+    margin: var(--light_GAP) var(--main_GAP);
+    font-size: 1.1em;
+    text-align: center;
+}

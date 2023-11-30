@@ -71,7 +71,7 @@ exports.login = async (req,res) => {
     const checkPassword = await bcrypt.compare(password, user.password)
     
     if(!checkPassword){
-        return res.status(422).json({msg: "Senha inválido, usuário não encontrado"})
+        return res.status(422).json({msg: "Senha inválida, usuário não encontrado"})
     }
     try {
         
