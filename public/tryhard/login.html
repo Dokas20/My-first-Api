@@ -17,13 +17,15 @@
     </div>
     <main id="main">
     </section>
-    <h1>Log In</h1>
+    <h1 id="title">Log In</h1>
     <section id="logInSection">
-        <h1>Introduz o teu endereço de <label for="iemail">e-mail </label>e a tua<label for="ipass"> palavra passe</label> para iniciares sessão.</h1>
-        <form action="#" method="post" autocomplete="on" id="formId">
+            <h1>Introduz o teu <span id="firstInfo">endereço de <label for="iemail">e-mail </label>e a tua<label for="ipass"> palavra passe</label> </span> para <span id="actionH1"> iniciares sessão.</span></h1>
+        
+            <form action="#" method="post"  autocomplete="on" id="formId">
             <div id="inputs">
-                <input type="text" name="email" id="iemail" required placeholder="Email...">
-                <input type="text" name="pass" id="ipass" required placeholder="Pass..." minlength="8" maxlength="22">
+                <div id="inputNameDiv"></div>
+                <input type="email" name="email" id="iemail" required placeholder="Email...">
+                <input type="password" name="pass" id="ipass" required placeholder="Pass..." minlength="8" maxlength="22">
             </div>
             <p id="termsAndConditions"></p>
             <div id="callToActions">
