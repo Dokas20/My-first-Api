@@ -74,8 +74,7 @@ formId.addEventListener('submit', async (e)=> {
             const apiResponse = await sigInUser(name.value, emailVerifyed, pass.value)
             console.log(apiResponse)
             if(apiResponse.msg == 'User inserido com sucesso'){
-                /*CONTINBUAR */
-                
+                const apiResponseLogin = await LoginUser(emailVerifyed, pass.value)
             } else {
                 email.style.border= '2px solid red'
                 apiResponseContainer.innerHTML= apiResponse.msg

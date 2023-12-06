@@ -35,13 +35,10 @@ router.delete('/dev/logoutAll',devControler.checktoken, devControler.logoutAllDe
 router.post('/products' ,devControler.checktoken,upload.array("files"),prodControler.createProd)
 router.get('/products', prodControler.findAll )
 router.patch('/products/:id', prodControler.addPopularity)
-/*
-router.get('/products/destaqued', prodControler.sercheAllDestaquedProducts )*/
 router.get('/products/:id', prodControler.findOne)
 router.delete('/products/:id',devControler.checktoken, prodControler.remove)
-/*
-router.patch('/products',devControler.checktoken,prodControler.uploadDestaqued)
-*/
+router.put('/products/popularity', devControler.checktoken, prodControler.addPordPopularity)
+
 // Payment Routs
 router.post('/create-checkout-session' ,userControler.checktoken, paymentControler.generatePaymentLink)
 router.get('/checkout-session', paymentControler.checkoutSession)
