@@ -90,7 +90,17 @@ exports.addPopularity = async (req,res) => {
         const popular = product[0].popularity +1
 
         const modification = await  Prod.updateOne({_id:id},{$set:{popularity:popular}})
-        return res.status(200).json('Popularity add whit sucesse' + modification)
+
+        const prodPopularity = await ProdPopularity.find()
+
+
+        if(prodPopularity[0].popularity [39] === null){
+            return console.log('abo')
+        }
+        else if(prodPopularity[0].popularity [0].popularity > popular+10){
+            return console.log(popular+10)
+        }
+       // return res.status(200).json('Popularity add whit sucesse' + modification)
         
     } catch (error) {
         return res.status(500).json(error)
