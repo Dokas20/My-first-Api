@@ -38,6 +38,7 @@ router.patch('/products/:id', prodControler.addPopularity)
 router.get('/products/:id', prodControler.findOne)
 router.delete('/products/:id',devControler.checktoken, prodControler.remove)
 router.put('/products/popularity', devControler.checktoken, prodControler.addPordPopularity)
+router.get('/popularity', prodControler.getProductsPop)
 
 // Payment Routs
 router.post('/create-checkout-session' ,userControler.checktoken, paymentControler.generatePaymentLink)

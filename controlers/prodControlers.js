@@ -83,6 +83,11 @@ exports.remove = async (req,res)=> {
     }
 }
 
+
+/*  POPULARIDADE     */
+
+
+
 exports.addPopularity = async (req,res) => {
     try {
         const id = req.params.id
@@ -91,19 +96,33 @@ exports.addPopularity = async (req,res) => {
 
         const modification = await  Prod.updateOne({_id:id},{$set:{popularity:popular}})
 
-        const prodPopularity = await ProdPopularity.find()
-
+        const prodPopularity = await ProdPopularity.find({}, '-priceInCents')
 
         if(prodPopularity[0].popularity [39] === null){
-            return console.log('abo')
+            let response = await sortProducts()
+            return res.json(200, 'produtos Reorganizados com sucesso',response )
         }
-        else if(prodPopularity[0].popularity [0].popularity > popular+10){
-            return console.log(popular+10)
+        else if(prodPopularity[0].popularity [39].popularity <= popular-10){
+            let response = await sortProducts()
+            return res.json(200,'produtos Reorganizados com sucesso', response)
+        }else {
+            return res.json( 200,'Popularity add whit sucesse' + modification)
         }
-       // return res.status(200).json('Popularity add whit sucesse' + modification)
         
     } catch (error) {
         return res.status(500).json(error)
+    }
+
+    async function sortProducts(){
+        const product = await Prod.find({},'-priceInCents')
+        product.sort((p1, p2) => (p1.popularity < p2.popularity) ? 1 : (p1.popularity > p2.popularity) ? -1 : 0)
+        const productsSorted = []
+        
+        for(let o = 0; o<40; o++ ){
+            productsSorted.push(product[o])
+        }
+        const updateProducts = await ProdPopularity.updateOne({}, {$set:{popularity: productsSorted}})
+        return updateProducts
     }
 }
 
@@ -124,6 +143,16 @@ exports.addPordPopularity = async (req,res)=> {
 
         await prod.save()
         return res.json(ProdPopularity) 
+        
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+}
+
+exports.getProductsPop = async (req,res)=> {
+    try {
+        const prodPopularity = await ProdPopularity.find({}, '-priceInCents')
+        return res.json(200, {'products':prodPopularity[0].popularity })
         
     } catch (error) {
         return res.status(500).json(error)
