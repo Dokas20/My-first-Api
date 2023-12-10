@@ -83,15 +83,24 @@ document.getElementById('resetBtn').addEventListener('click', ()=> {
 const dataShoes = []
 atributeShoes()
 async function atributeShoes(){
-    const shoes = await getAllProducts()
+    const shoes = await getAllPopularProducts()
     dataShoes.push(shoes)
 }
+console.log(dataShoes)
 
 async function getAllProducts() {
     const result = await fetch("http://localhost:3000/products").catch(e => { console.log(e.error) })
 
     const dataAllProducts = await result.json()
     return dataAllProducts
+}
+async function getAllPopularProducts() {
+    const result = await fetch("http://localhost:3000/popularity").catch(e => { console.log(e.error) })
+
+    const dataAllProducts = await result.json()
+    const productsReturn= [] 
+    dataAllProducts.products.map((prod)=> {if(prod!= null ){ productsReturn.push(prod)}})
+    return productsReturn
 }
 
 
