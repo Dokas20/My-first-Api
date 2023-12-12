@@ -2,6 +2,16 @@ const btn = document.getElementById('btnDiv')
 const navId = document.getElementById('navId')
 const contain = document.getElementById('menuContain')
 
+carProductsNotify()
+function carProductsNotify(){
+    const hasProducts =localStorage.getItem('id_0')
+    	if(hasProducts){
+            let div = document.createElement('div')
+            div.setAttribute('id', 'hasProductsId')
+            btn.append(div)
+        }
+}
+
 btn.addEventListener('click', ()=> {
 
     if(navId.classList.value){

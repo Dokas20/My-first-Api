@@ -36,6 +36,16 @@ btn.addEventListener('click', ()=> {
 
 })
 
+carProductsNotify()
+function carProductsNotify(){
+    const hasProducts =localStorage.getItem('id_0')
+    	if(hasProducts){
+            let div = document.createElement('div')
+            div.setAttribute('id', 'hasProductsId')
+            document.getElementById('btnCar').append(div)
+        }
+}
+
 
 
 serchInputDiv.addEventListener('click', ()=> {
