@@ -122,6 +122,11 @@ function createProdPost(prod, apendConst, idNumber){
         changeQuantity(value, prod , idNumber)
         
     })
+
+    divForImg.addEventListener('click', ()=> {
+        window.location = 'http://localhost:3000/tryhard/productSingel.html'
+        sessionStorage.setItem('prod', JSON.stringify(prod._prodId))
+    })
 }
 function deleteProd(prodId){
     const newProductsCar = []

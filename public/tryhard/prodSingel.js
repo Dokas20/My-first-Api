@@ -27,9 +27,41 @@ btn.addEventListener('click', ()=> {
     
 })
 
-const dataProd = JSON.parse(sessionStorage.getItem('prod'))
-setInformations()
-async function setInformations (){
+carProductsNotify()
+function carProductsNotify(){
+    const hasProducts =localStorage.getItem('id_0')
+    	if(hasProducts){
+            let div = document.createElement('div')
+            div.setAttribute('id', 'hasProductsId')
+            document.getElementById('btnCar').append(div)
+        }
+}
+
+
+const sessionProd = JSON.parse(sessionStorage.getItem('prod'))
+if(sessionProd.name){
+    setInformations(sessionProd)
+} else {
+    setInfoById()
+    async function setInfoById(){
+        
+        let id = sessionProd
+        const dataProduct = await getOneProduct(id)
+        
+        setInformations(dataProduct)
+    }
+}
+
+
+async function getOneProduct(id){
+    const result = await fetch(`http://localhost:3000/products/${id}`).catch(e => {
+        console.log(e.error)
+    })
+    return result.json()
+}
+
+
+async function setInformations (dataProd){
 
     const name = dataProd.name
     const description = dataProd.description
@@ -137,7 +169,7 @@ async function setInformations (){
         } else {
             disponivel = false
         }
-        printStockShoes(shoeNumber, disponivel)
+        printStockShoes(shoeNumber, disponivel, dataProd)
     }
 }
 
@@ -153,50 +185,63 @@ class PordutoCarrinho {
     }
 }
 
+
 const prodInfo = []
 
-
-function printStockShoes (number, dis){
+function printStockShoes (number, dis, dataProd){
     const contain = document.getElementById('stockContain')
     
     const numberContain = document.createElement('div')
     if(dis == true){
-        
         numberContain.innerHTML = `<div id="i${number}" class="shoeNumberContain"> <p class="shoeNumber">${number}</p></div>`
+        
     }
     else{
         return
     }
     contain.append(numberContain)
-
+    
     numberContain.addEventListener('click', ()=> {
+        
+        document.getElementById(`i${number}`).classList.add('pickUpNumber')
+        if(prodInfo[0]){
+         document.getElementById(`i${prodInfo[0]._size}`).classList.remove('pickUpNumber')
+     }
         prodInfo[0] = new PordutoCarrinho(dataProd._id, number ,dataProd.stock, 1,   dataProd.src[0].slice(7) , dataProd.name, dataProd.price)
     })
 }
 
 addCarBtn.addEventListener('click', ()=> {
-   let product  = prodInfo[0]
-    if(!product){
-        window.alert('mete o manbo nenghe')
-    } else{
-
-        const arrayProdValid = []
-        const idStoredNumber = localStorage.length
-        if(idStoredNumber == 0){
-            localStorage.setItem(`id_0`,  JSON.stringify(product));
-        } else {
+    if( addCarBtn.innerText== 'Visitar carrinho'){
+        window.location = 'http://localhost:3000/tryhard/car.html'
+    } else {
+        let product  = prodInfo[0]
+        
+       if(!product){
+           window.alert('mete o manbo nenghe')
+        } else{
             
-            for( let a = 0; a< idStoredNumber; a++){
-                const item = JSON.parse(localStorage.getItem(`id_${a}`))
-                if(item._prodId == product._prodId){
-                    arrayProdValid.push('1')
-                } 
-            }
-            if(arrayProdValid.length == 0){
+            const arrayProdValid = []
+            const idStoredNumber = localStorage.length
+            if(idStoredNumber == 0){
+                localStorage.setItem(`id_0`,  JSON.stringify(product));
+            } else {
                 
-             localStorage.setItem(`id_${idStoredNumber}`,  JSON.stringify(product));
+                for( let a = 0; a< idStoredNumber; a++){
+                    const item = JSON.parse(localStorage.getItem(`id_${a}`))
+                    if(item._prodId == product._prodId){
+                        arrayProdValid.push('1')
+                    } 
+                }
+                if(arrayProdValid.length == 0){
+                    
+                    localStorage.setItem(`id_${idStoredNumber}`,  JSON.stringify(product));
             
+                }
             }
-        }
-    } 
+            addCarBtn.innerHTML= '<h1>Visitar carrinho</h1>'
+            carProductsNotify()
+            
+        }     
+    }
     })  

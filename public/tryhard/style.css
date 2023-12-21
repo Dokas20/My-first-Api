@@ -23,7 +23,7 @@ body{
 }
 /*header*/
 header{
-    height: var(--extra_GAP);
+    height: 72px;
     width: 100%;
     background-color: var(--contrastColor);
     display: flex;
@@ -105,16 +105,18 @@ header{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transform: translateY(-2px);
 }
 #btnLupa p{
     color: white;
     font-size: 0.6em;
-    transform: translate(-4px, 8px);
+    transform: translate(-4px, 10px);
 }
 
 header img{
     width: 48px;
     height: 48px;
+    transform: translateY(4px);
 }/*
 #navId{
     position: absolute;

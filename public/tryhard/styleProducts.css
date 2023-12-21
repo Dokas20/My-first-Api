@@ -24,7 +24,7 @@ body{
 }
 /*header*/
 header{
-    height: var(--extra_GAP);
+    height: 72px;
     width: 100%;
     background-color: var(--contrastColor);
     display: flex;
@@ -75,6 +75,7 @@ header img{
     width: 48px;
     height: 48px;
 }
+header a{ text-decoration: none;}
 #logoHref{
     transform: translate(25%);
 }
@@ -97,7 +98,7 @@ header img{
     border-bottom: 0px solid transparent;
     border-top-left-radius: 50% ;
     border-top-right-radius: 50% ;
-    transform: translate(0px, 8px);
+    transform: translate(0px, 7px);
 }
 #LogInDiv::after{
     content: '';
@@ -118,7 +119,7 @@ header img{
     width: 15px;
     height: 20px;
     border: 2px solid white;
-    transform: translateY(6px);
+    transform: translateY(4px);
 }
 #carDiv::after{
     content: '';
